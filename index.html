@@ -20,13 +20,13 @@
     <meta property="twitter:description" content="An interactive music retreat at sea level. June 9–14, 2027.">
     <meta property="twitter:image" content="https://zerokfest.com/assets/zerok_poster.jpg">
 
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="preload" href="assets/zerok_poster.jpg" as="image">
+    <link rel="preload" href="assets/logo.jpg" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Rye&display=fallback" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=fallback" rel="stylesheet">
 
     <style>
         :root {
@@ -36,11 +36,10 @@
             --teal: #2ec4b6;
             --dark: #06111f;
             --dark-card: rgba(8, 18, 32, 0.88);
-            --text: #ede8e0;
-            --text-dim: #a09888;
+            --text: #e8d9b5;
+            --text-dim: #c4b48a;
             --sand: #e8d9b5;
-            --border: rgba(212, 175, 55, 0.22);
-            --font-brand: 'Rye', Georgia, serif;
+            --border: rgba(46, 196, 182, 0.28);
             --font-heading: 'Bebas Neue', 'Arial Narrow', sans-serif;
             --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
             --nav-height: 64px;
@@ -60,23 +59,24 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         h2 {
             font-family: var(--font-heading);
-            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
             text-align: center;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 16px;
             line-height: 1;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 40%, #fff 50%, var(--gold-light) 60%, var(--gold) 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--gold);
+            text-shadow: 0 2px 18px rgba(0,0,0,0.7);
         }
         h3 { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
         p { margin-bottom: 1rem; }
-        a { color: var(--gold); text-decoration: none; }
+        a { color: var(--teal); text-decoration: none; }
         a:hover { color: var(--gold-light); text-decoration: underline; }
-        .section-subtitle { text-align: center; color: rgba(255,255,255,0.78); font-size: 1.05rem; max-width: 720px; margin: 0 auto 40px; }
+        :focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 3px;
+        }
+        .section-subtitle { text-align: center; color: var(--sand); font-size: 1.05rem; max-width: 720px; margin: 0 auto 40px; opacity: 0.92; }
         .content-section { padding: var(--section-pad) 0; position: relative; overflow: hidden; }
         .content-section > .section-bg {
             position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0;
@@ -85,18 +85,29 @@
         .content-section::before {
             content: '';
             position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(to bottom, rgba(6,17,31,0.72) 0%, rgba(6,17,31,0.42) 40%, rgba(6,17,31,0.72) 100%);
+            background: linear-gradient(to bottom, rgba(6,17,31,0.62) 0%, rgba(6,17,31,0.32) 40%, rgba(6,17,31,0.68) 100%);
+        }
+        .content-section.wash-heavy::before {
+            background: linear-gradient(to bottom, rgba(6,17,31,0.8) 0%, rgba(6,17,31,0.55) 45%, rgba(6,17,31,0.82) 100%);
         }
         .content-section > .container { position: relative; z-index: 2; }
         .content-section + .content-section::after {
             content: '';
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: min(60%, 400px); height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), var(--teal), var(--gold), transparent);
-            z-index: 3; opacity: 0.45;
+            background: linear-gradient(90deg, transparent, var(--teal), var(--sunset), var(--teal), transparent);
+            z-index: 3; opacity: 0.5;
         }
         .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
         .fade-in.visible { opacity: 1; transform: none; }
+        .panel {
+            background: rgba(8, 18, 32, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
 
         #navbar {
             position: fixed; top: 0; left: 0; width: 100%;
@@ -106,29 +117,32 @@
             border-bottom: 1px solid var(--border);
         }
         #navbar .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-        #navbar .logo { font-family: var(--font-brand); font-size: 1.4rem; color: var(--gold); }
-        .logo .nav-date { font-family: var(--font-heading); color: var(--text-dim); font-size: 0.85em; letter-spacing: 2px; margin-left: 8px; }
-        /* Rye has no slashed-zero glyph — draw the cross so every zer0K reads as zero */
+        #navbar .logo {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--sand); text-decoration: none;
+        }
+        #navbar .logo img {
+            width: 44px; height: 44px; border-radius: 50%;
+            display: block; object-fit: cover;
+        }
+        .logo .nav-date { font-family: var(--font-heading); color: var(--text-dim); font-size: 1.05rem; letter-spacing: 2px; }
         .z0 { position: relative; display: inline-block; }
         .z0::after {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 8%;
-            width: 0.155em;
-            height: 86%;
+            left: 50%; top: 8%;
+            width: 0.155em; height: 86%;
             background: currentColor;
             border-radius: 0.05em;
             transform: translateX(-50%) rotate(-34deg);
             pointer-events: none;
         }
-        .header-content h1 .z0::after { box-shadow: 2px 3px 10px rgba(0,0,0,0.55); }
-        #navbar .nav-links { display: flex; list-style: none; gap: 2px; }
+        #navbar .nav-links { display: flex; list-style: none; gap: 4px; }
         #navbar .nav-links li a {
-            color: var(--text-dim); padding: 8px 9px; font-weight: 500;
-            text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.4px;
+            color: var(--text-dim); padding: 8px 12px; font-weight: 500;
+            text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.6px;
         }
-        #navbar .nav-links li a:hover, #navbar .nav-links li a.active { color: var(--gold); text-decoration: none; }
+        #navbar .nav-links li a:hover, #navbar .nav-links li a.active { color: var(--teal); text-decoration: none; }
         .hamburger { display: none; cursor: pointer; background: none; border: none; }
         .hamburger .bar { display: block; width: 24px; height: 2px; margin: 5px auto; background: var(--text); }
 
@@ -138,51 +152,48 @@
             display: flex; justify-content: center; align-items: center;
             position: relative; overflow: hidden; text-align: center;
             padding: 36px 24px 56px;
-            /* cover + top: keep honu heads in frame; crop the poster's bottom type instead */
             background: var(--dark) url('assets/zerok_poster.jpg') center top / cover no-repeat;
         }
         .header-overlay {
             position: absolute; inset: 0; z-index: 1;
-            background: radial-gradient(115% 80% at 50% 48%, rgba(6,17,31,0.55) 0%, rgba(6,17,31,0.35) 55%, rgba(6,17,31,0.62) 100%);
+            background: radial-gradient(100% 80% at 50% 42%, rgba(6,17,31,0.28) 0%, rgba(6,17,31,0.55) 62%, rgba(6,17,31,0.78) 100%);
         }
-        .header-content { position: relative; z-index: 2; max-width: 860px; }
-        .header-content h1 {
-            font-family: var(--font-brand);
-            font-size: clamp(3.2rem, 9vw, 6rem);
-            color: var(--gold);
-            text-shadow: 2px 3px 16px rgba(0,0,0,0.7);
-            line-height: 1.05;
+        .header-content { position: relative; z-index: 2; max-width: 640px; }
+        .hero-logo {
+            width: min(220px, 52vw); height: auto; border-radius: 50%;
+            display: block; margin: 0 auto 18px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.45);
         }
         .header-content .date-span {
             display: block; font-family: var(--font-heading);
             font-size: clamp(1.2rem, 3.2vw, 1.85rem);
-            letter-spacing: 3px; margin-top: 12px; color: var(--text); text-transform: uppercase;
+            letter-spacing: 3px; margin-bottom: 12px; color: var(--sand); text-transform: uppercase;
         }
-        .header-about-text { max-width: 640px; margin: 0 auto 1.6rem; font-size: 1.08rem; color: rgba(255,255,255,0.9); }
+        .header-about-text { max-width: 520px; margin: 0 auto 1.4rem; font-size: 1.05rem; color: var(--sand); }
         .concept-chip {
-            display: inline-block; margin-bottom: 16px; padding: 6px 14px;
+            display: inline-block; margin-bottom: 14px; padding: 6px 14px;
             border: 1px solid var(--border); border-radius: 999px;
             font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
         }
-        .countdown { display: flex; justify-content: center; gap: 12px; margin: 0 auto 1.5rem; flex-wrap: wrap; }
+        .countdown { display: flex; justify-content: center; gap: 12px; margin: 0 auto 1.4rem; flex-wrap: wrap; }
         .cd-unit {
             min-width: 64px; padding: 10px 6px; text-align: center;
             background: rgba(6,17,31,0.5); border: 1px solid var(--border); border-radius: 10px;
         }
-        .cd-num { font-family: var(--font-heading); font-size: 2.3rem; color: var(--gold); line-height: 1; }
+        .cd-num { font-family: var(--font-heading); font-size: 2.3rem; color: var(--sunset); line-height: 1; }
         .cd-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
         .cd-message { margin: 0 auto 1.5rem; font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
         .header-buttons { display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .btn {
-            display: inline-block; background: var(--gold); color: var(--dark);
-            padding: 12px 28px; border-radius: 6px; font-weight: 700;
+            display: inline-block; background: var(--sunset); color: #1a0c08;
+            padding: 12px 28px; border-radius: 6px; font-weight: 700; border: none; cursor: pointer;
             font-family: var(--font-heading); font-size: 1.1rem; letter-spacing: 1.5px; text-transform: uppercase;
         }
-        .btn:hover { background: var(--gold-light); text-decoration: none; color: var(--dark); }
-        .btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
-        .btn-outline:hover { background: var(--gold); color: var(--dark); }
+        .btn:hover { background: #ff9378; text-decoration: none; color: #1a0c08; }
+        .btn-outline { background: transparent; border: 2px solid var(--teal); color: var(--teal); }
+        .btn-outline:hover { background: var(--teal); color: var(--dark); }
         .scroll-hint {
-            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2;
+            position: absolute; bottom: 24px; left: 50%; z-index: 2;
             width: 20px; height: 20px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
             transform: translateX(-50%) rotate(45deg); opacity: 0.55;
         }
@@ -195,19 +206,22 @@
         .stat .num { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--gold); line-height: 1; }
         .stat .lbl { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
 
-        .flow-tabs, .event-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+        .flow-tabs, .event-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 22px; flex-wrap: wrap; }
         .flow-tab, .event-tab {
             background: var(--dark-card); border: 2px solid var(--border); color: var(--text-dim);
             font-family: var(--font-heading); font-size: 1.05rem; letter-spacing: 1.5px;
-            padding: 8px 18px; border-radius: 8px; cursor: pointer; text-transform: uppercase;
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; text-transform: uppercase;
         }
-        .flow-tab.active, .event-tab.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-        .flow-day { display: none; max-width: 680px; margin: 0 auto; background: var(--dark-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+        .flow-tab { display: flex; flex-direction: column; align-items: center; min-width: 88px; }
+        .flow-tab small { font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.4px; font-weight: 500; opacity: 0.8; text-transform: none; }
+        .flow-tab.active, .event-tab.active { background: var(--teal); color: var(--dark); border-color: var(--teal); }
+        .flow-day { display: none; max-width: 680px; margin: 0 auto; }
         .flow-day.active { display: block; }
         .flow-day h3 { color: var(--teal); }
-        .flow-day p { color: rgba(255,255,255,0.82); margin: 0; }
+        .flow-day p { color: var(--sand); margin: 0; }
 
         .site-grid, .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .card-grid.three { grid-template-columns: repeat(3, 1fr); }
         .site-card, .plain-card {
             border-radius: 14px; overflow: hidden; position: relative;
             background: var(--dark-card); border: 1px solid var(--border);
@@ -217,19 +231,22 @@
         .site-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.15)); }
         .site-card-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 22px; }
         .site-card-content h3 { color: var(--gold); font-size: 1.4rem; margin-bottom: 6px; }
-        .site-card-content p { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
+        .site-card-content p { color: var(--sand); font-size: 0.9rem; margin: 0; }
+        .site-card-plain { min-height: 220px; display: flex; align-items: flex-end; background: linear-gradient(160deg, rgba(46,196,182,0.14), var(--dark-card)); }
+        .site-card-plain::after { display: none; }
+        .site-card-plain .site-card-content { position: relative; }
         .tba { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
         .plain-card { padding: 24px; }
         .plain-card h3 { color: var(--gold); font-size: 1.35rem; }
-        .plain-card p, .plain-card li { color: rgba(255,255,255,0.78); font-size: 0.92rem; }
+        .plain-card p, .plain-card li { color: var(--sand); font-size: 0.92rem; }
         .plain-card ul { padding-left: 18px; }
 
         .location-content { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-        .location-info { background: var(--dark-card); padding: 28px; border-radius: 14px; border: 1px solid var(--border); }
+        .location-info { }
         .map-container { border-radius: 14px; overflow: hidden; height: 380px; border: 2px solid var(--border); }
         .map-container iframe { width: 100%; height: 100%; border: 0; }
 
-        .form-card { max-width: 640px; margin: 0 auto; background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+        .form-card { max-width: 640px; margin: 0 auto; }
         label { display: block; font-size: 0.82rem; letter-spacing: 0.6px; color: var(--text-dim); margin: 14px 0 6px; }
         input, select, textarea {
             width: 100%; padding: 10px 12px; border-radius: 8px;
@@ -240,13 +257,16 @@
         .check-grid { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 6px; }
         .check-grid label { margin: 0; color: var(--text); font-size: 0.88rem; display: flex; align-items: center; gap: 6px; }
         .check-grid input { width: auto; }
+        .mail-fallback { margin-top: 16px; text-align: center; font-size: 0.85rem; color: var(--text-dim); }
+        .mail-fallback[hidden], [hidden] { display: none !important; }
 
         .main-photo-container {
             margin-bottom: 16px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             height: min(70vh, 560px); min-height: 220px;
         }
-        .main-photo-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; border: 2px solid var(--border); }
+        .main-photo-container img { max-width: 100%; max-height: calc(100% - 28px); object-fit: contain; border-radius: 10px; border: 2px solid var(--border); }
+        .photo-hint { margin-top: 8px; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); }
         .thumbnail-wrapper { position: relative; }
         .carousel-thumbnails {
             display: flex; overflow-x: auto; gap: 8px; padding: 8px 0; scrollbar-width: none;
@@ -256,7 +276,7 @@
             width: 110px; height: 72px; object-fit: cover; cursor: pointer;
             border-radius: 6px; border: 2px solid transparent; flex-shrink: 0;
         }
-        .carousel-thumbnails img.active-thumb { border-color: var(--gold); }
+        .carousel-thumbnails img.active-thumb { border-color: var(--teal); }
         .scroll-arrow {
             position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
             background: rgba(0,0,0,0.5); border: none; color: white; font-size: 1.3rem;
@@ -267,18 +287,22 @@
             display: none; position: fixed; z-index: 2000; inset: 0;
             background: rgba(0,0,0,0.95); justify-content: center; align-items: center;
         }
-        .modal img { max-width: 90vw; max-height: 85vh; border-radius: 8px; }
+        .modal.is-open { display: flex; }
+        .modal figure { margin: 0; text-align: center; }
+        .modal img { max-width: 90vw; max-height: 80vh; border-radius: 8px; }
+        .modal figcaption { color: var(--sand); margin-top: 10px; font-size: 0.9rem; }
         .modal-close, .modal-prev, .modal-next {
-            position: absolute; color: white; cursor: pointer; font-size: 2rem; opacity: 0.75;
+            position: absolute; color: white; cursor: pointer; font-size: 2rem;
+            opacity: 0.85; background: none; border: none; line-height: 1;
         }
         .modal-close { top: 12px; right: 18px; }
         .modal-prev { left: 10px; top: 50%; } .modal-next { right: 10px; top: 50%; }
 
         footer { text-align: center; padding: 24px 20px; background: #040910; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border); }
-        .sister-stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
-        .sister-stat { text-align: center; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 10px; }
-        .sister-stat .num { font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold); line-height: 1; }
-        .sister-stat .lbl { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
+        .sister-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+        .sister-card { min-height: 220px; display: block; text-decoration: none; color: inherit; }
+        .sister-card:hover { text-decoration: none; }
+        .sister-card .num { font-family: var(--font-heading); font-size: 2rem; color: var(--gold); }
 
         @media (max-width: 900px) {
             #navbar .nav-links {
@@ -288,8 +312,13 @@
             #navbar .nav-links.active { left: 0; }
             #navbar .nav-links li a { display: block; padding: 1rem 1.4rem; font-size: 1.05rem; }
             .hamburger { display: block; }
-            .stat-grid, .site-grid, .card-grid, .location-content, .form-row, .sister-stat-grid { grid-template-columns: 1fr; }
+            .stat-grid, .site-grid, .card-grid, .card-grid.three, .location-content, .form-row, .sister-grid { grid-template-columns: 1fr; }
             :root { --section-pad: 56px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .fade-in { opacity: 1; transform: none; transition: none; }
+            #navbar .nav-links { transition: none; }
         }
     </style>
     <script type="application/ld+json">
@@ -301,14 +330,14 @@
         "endDate": "2027-06-14",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "eventStatus": "https://schema.org/EventScheduled",
-        "description": "An invite-only interactive music retreat at sea level in Hanalei, Kauaʻi.",
+        "description": "An invite-only interactive music retreat at sea level on Kauaʻi's North Shore. Venue TBA.",
         "image": "https://zerokfest.com/assets/zerok_poster.jpg",
         "url": "https://zerokfest.com/",
         "isAccessibleForFree": true,
         "location": {
             "@type": "Place",
-            "name": "Hanalei Bay",
-            "address": { "@type": "PostalAddress", "addressLocality": "Hanalei", "addressRegion": "HI", "addressCountry": "US" }
+            "name": "North Shore Kauaʻi (venue TBA)",
+            "address": { "@type": "PostalAddress", "addressRegion": "HI", "addressCountry": "US" }
         }
     }
     </script>
@@ -316,18 +345,18 @@
 <body>
     <nav id="navbar">
         <div class="container">
-            <a href="#home" class="logo" aria-label="zer0K June '27">zer<span class="z0" aria-hidden="true">0</span>K <span class="nav-date">June '27</span></a>
-            <ul class="nav-links">
-                <li><a href="#about">Sea Level</a></li>
+            <a href="#home" class="logo" aria-label="zer0K June 2027">
+                <img src="assets/logo-nav.png" alt="" width="44" height="44">
+                <span class="nav-date">June '27</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
                 <li><a href="#schedule">Flow</a></li>
-                <li><a href="#the-site">Base Camp</a></li>
-                <li><a href="#oceanlympics">Ocean-lympics</a></li>
-                <li><a href="#music">Sound</a></li>
-                <li><a href="#kuleana">Kuleana</a></li>
+                <li><a href="#the-site">Site</a></li>
                 <li><a href="#photos">Gallery</a></li>
-                <li><a href="#interest">Hand Up</a></li>
+                <li><a href="#interest">Interest</a></li>
             </ul>
-            <button class="hamburger" aria-label="Toggle menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+            <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
         </div>
     </nav>
 
@@ -335,8 +364,9 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <p class="concept-chip">Concept · venue in progress · dates locked</p>
-            <h1 aria-label="zer0K">zer<span class="z0" aria-hidden="true">0</span>K<span class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</span></h1>
-            <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. The Federation touches down. An invite-only music retreat at sea level — everyone jams, everyone swims, everyone cooks.</p>
+            <img class="hero-logo" src="assets/logo.jpg" alt="zer0K" width="220" height="220">
+            <p class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</p>
+            <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. An invite-only music retreat at sea level — everyone jams, everyone swims, everyone cooks.</p>
             <div class="countdown" id="countdown" role="timer" aria-label="Countdown to zer0K">
                 <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
                 <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hrs</span></div>
@@ -344,8 +374,7 @@
                 <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">sec</span></div>
             </div>
             <div class="header-buttons">
-                <a href="#interest" class="btn rsvp-gate-link">Raise Your Hand</a>
-                <a href="#about" class="btn btn-outline">What is zer<span class="z0">0</span>K</a>
+                <a href="#interest" class="btn">Raise Your Hand</a>
             </div>
         </div>
         <div class="scroll-hint" aria-hidden="true"></div>
@@ -353,7 +382,7 @@
 
     <main>
         <section id="about" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/ninek_pier_crew.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/crew_pier_walk.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Sea Level</h2>
                 <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer<span class="z0">0</span>K is the base camp — five nights on Kauaʻi's North Shore.</p>
@@ -362,29 +391,29 @@
                     <div class="stat"><div class="num">2,000 ft</div><div class="lbl">2k Fest · Murphys, CA · Fall</div></div>
                     <div class="stat"><div class="num">0 ft</div><div class="lbl">zer<span class="z0">0</span>K · Hanalei, HI · June</div></div>
                 </div>
-                <p class="fade-in" style="max-width:680px;margin:0 auto;text-align:center;color:var(--text-dim);">No tickets. No public ads. Same format as the other houses: community-cooked meals, open jams, a competitive track, and a hard rule — <em>no spectators, only participants.</em> Exact base camp is still being found. Dates are not.</p>
+                <p class="fade-in panel" style="max-width:720px;margin:0 auto;text-align:center;">If you already know 2k or 9k: same house rules, salt water, no owned land yet. If you don't: it's a private, ticket-free music camp. Community-cooked meals, open jams, a playful competition track, and a hard rule — <em>no spectators, only participants.</em> Exact base camp is still being found. Dates are not.</p>
             </div>
         </section>
 
         <section id="schedule" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/ninek_guitar_duo_sand.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/dash_beach_openmic.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">The Flow</h2>
                 <p class="section-subtitle fade-in">A shape, not a lineup. Subject to tides. Should not be trusted or believed.</p>
-                <div class="flow-tabs fade-in">
-                    <button class="flow-tab active" data-day="wed">Wed 9</button>
-                    <button class="flow-tab" data-day="thu">Thu 10</button>
-                    <button class="flow-tab" data-day="fri">Fri 11</button>
-                    <button class="flow-tab" data-day="sat">Sat 12</button>
-                    <button class="flow-tab" data-day="sun">Sun 13</button>
-                    <button class="flow-tab" data-day="mon">Mon 14</button>
+                <div class="flow-tabs fade-in" role="tablist">
+                    <button class="flow-tab active" type="button" data-day="wed">Wed 9 <small>Arrive</small></button>
+                    <button class="flow-tab" type="button" data-day="thu">Thu 10 <small>Ocean I</small></button>
+                    <button class="flow-tab" type="button" data-day="fri">Fri 11 <small>Loud night</small></button>
+                    <button class="flow-tab" type="button" data-day="sat">Sat 12 <small>Ocean II</small></button>
+                    <button class="flow-tab" type="button" data-day="sun">Sun 13 <small>Pau hana</small></button>
+                    <button class="flow-tab" type="button" data-day="mon">Mon 14 <small>Breakdown</small></button>
                 </div>
-                <div class="flow-day active fade-in" id="flow-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
-                <div class="flow-day" id="flow-thu"><h3>Ocean-lympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Dinner pairing: poke and post-rock. Acoustic after dark if the neighbors are in the tent.</p></div>
-                <div class="flow-day" id="flow-fri"><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
-                <div class="flow-day" id="flow-sat"><h3>Ocean-lympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the site allows.</p></div>
-                <div class="flow-day" id="flow-sun"><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Championship playoff. Talent show. Imu night if we earn it. Then pau — we're done being loud.</p></div>
-                <div class="flow-day" id="flow-mon"><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
+                <div class="flow-day panel active fade-in" id="flow-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
+                <div class="flow-day panel" id="flow-thu"><h3>Oceanlympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Dinner pairing: poke and post-rock. Acoustic after dark if the neighbors are in the tent.</p></div>
+                <div class="flow-day panel" id="flow-fri"><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
+                <div class="flow-day panel" id="flow-sat"><h3>Oceanlympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the site allows.</p></div>
+                <div class="flow-day panel" id="flow-sun"><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Championship playoff. Talent show. Imu night if we earn it. Then we're done being loud.</p></div>
+                <div class="flow-day panel" id="flow-mon"><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
             </div>
         </section>
 
@@ -394,9 +423,8 @@
                 <h2 class="fade-in">Base Camp</h2>
                 <p class="section-subtitle fade-in">We don't own land here. We're buying buffer distance and neighbor trust — not a vacation-rental party.</p>
                 <div class="site-grid fade-in">
-                    <div class="site-card">
-                        <div class="site-card-bg" style="background-image:url('assets/lanai_jam_dog.jpg');"></div>
-                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where we sleep</h3><p>Full-site camp buyout or partner retreat. Bunks + tents. Not an STR.</p></div>
+                    <div class="site-card site-card-plain">
+                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where we sleep</h3><p>Full-site camp buyout or partner retreat. Bunks + tents. Not a vacation rental.</p></div>
                     </div>
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/saxes_on_sand.jpg');"></div>
@@ -415,30 +443,42 @@
         </section>
 
         <section id="oceanlympics" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/ninek_glow_beach.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/night_glow_swim.jpg');"></div>
             <div class="container">
-                <h2 class="fade-in">Ocean-lympics</h2>
-                <p class="section-subtitle fade-in">Glowlympics goes saltwater. Teams of 3. Friday + Saturday heats. Sunday playoff.</p>
-                <div class="card-grid fade-in">
-                    <div class="plain-card"><h3>Snorkel scavenger</h3><p>Tunnels reef. Find the flags, don't kick coral, first team back on the sand.</p></div>
-                    <div class="plain-card"><h3>SUP / outrigger relay</h3><p>Hanalei Bay. Three legs, one board or canoe, no excuses about the current.</p></div>
-                    <div class="plain-card"><h3>Tide-pool treasure</h3><p>Low-tide hunt. Look, don't take. Photos count as finds.</p></div>
-                    <div class="plain-card"><h3>Night glow swim</h3><p>LED bracelets, calm water, no lasers. Last team still glowing wins the vibe.</p></div>
-                    <div class="plain-card"><h3>Sunrise summit</h3><p>Okolehao Trail. First three at the overlook get the seed pick.</p></div>
-                    <div class="plain-card"><h3>Sand mini golf + coconut bocce</h3><p>Because we still need a putting game and something you can lose a coconut to.</p></div>
+                <h2 class="fade-in">Oceanlympics</h2>
+                <p class="section-subtitle fade-in">The competition track goes saltwater. Teams of 3. Friday + Saturday heats. Sunday playoff. Tunnels needs a Hāʻena reservation.</p>
+                <div class="site-grid fade-in">
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/oceanlympics_snorkel.jpg');"></div>
+                        <div class="site-card-content"><h3>Snorkel scavenger</h3><p>Tunnels reef. Find the flags, don't kick coral, first team back on the sand.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/night_glow_swim.jpg');"></div>
+                        <div class="site-card-content"><h3>Night glow swim</h3><p>LED bracelets, calm water only. Called off if surf is up. Last team still glowing wins the vibe.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/sunrise_summit.jpg');"></div>
+                        <div class="site-card-content"><h3>Sunrise summit</h3><p>Okolehao Trail. First three at the overlook get the seed pick.</p></div>
+                    </div>
+                    <div class="site-card site-card-plain">
+                        <div class="site-card-content">
+                            <h3>Also in the mix</h3>
+                            <p>SUP / outrigger relay in the bay. Tide-pool treasure — look, don't take. Sand mini golf + coconut bocce, because we still need a putting game.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="music" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/ninek_shaka_bay.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/saxes_on_sand.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Sound at Sea Level</h2>
-                <p class="section-subtitle fade-in">Don't ship the Murphys rig. Salt air will eat it. Three tiers:</p>
+                <p class="section-subtitle fade-in">Don't fly the California PA. Salt air will eat it. Three tiers:</p>
                 <div class="card-grid fade-in">
                     <div class="plain-card"><h3>Rent the backbone</h3><p>PA, mixer, kit, amps from an on-island house. Biggest line item. Cost it early.</p></div>
-                    <div class="plain-card"><h3>Fly one instrument</h3><p>Everyone brings one as checked bag. Diatonic workshop kit is luggage-portable.</p></div>
-                    <div class="plain-card"><h3>Projector, not lasers</h3><p>Laptop + Resolume + a bright projector. No Class 4 outdoors on year one.</p></div>
+                    <div class="plain-card"><h3>Fly one instrument</h3><p>Everyone brings one as checked bag. The can't-hit-a-wrong-note kit is luggage-portable.</p></div>
+                    <div class="plain-card"><h3>Projector, not lasers</h3><p>Laptop, visuals, a bright projector. Keep the light show simple on year one.</p></div>
                     <div class="plain-card"><h3>Salt-air care</h3><p>Rinse, dry, cover at night. Nothing you love sits in the trade wind uncovered.</p></div>
                 </div>
             </div>
@@ -449,11 +489,22 @@
             <div class="container">
                 <h2 class="fade-in">Food × Music</h2>
                 <p class="section-subtitle fade-in">Community-cooked. Chip in on ingredients. Pairings write themselves at sea level.</p>
-                <div class="card-grid fade-in">
-                    <div class="plain-card"><h3>Poke &amp; Post-Rock</h3><p>Thursday. Fresh, quiet, long notes.</p></div>
-                    <div class="plain-card"><h3>Loco Moco &amp; Lo-Fi</h3><p>Saturday. Comfort food, low end.</p></div>
-                    <div class="plain-card"><h3>Musubi &amp; Math Rock</h3><p>Sunday. Tight, weird, portable.</p></div>
-                    <div class="plain-card"><h3>Imu &amp; Ambient · Shave Ice &amp; Shoegaze</h3><p>If we earn the pit. Melted everything.</p></div>
+                <div class="site-grid fade-in">
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/john_imu_night.jpg');"></div>
+                        <div class="site-card-content"><h3>Poke &amp; Post-Rock</h3><p>Thursday. Fresh, quiet, long notes.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/billroland_lanai.jpg');"></div>
+                        <div class="site-card-content"><h3>Loco Moco &amp; Lo-Fi</h3><p>Saturday. Comfort food, low end.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/lanai_jam_dog.jpg');"></div>
+                        <div class="site-card-content"><h3>Musubi &amp; Math Rock</h3><p>Sunday. Tight, weird, portable.</p></div>
+                    </div>
+                    <div class="site-card site-card-plain">
+                        <div class="site-card-content"><h3>Imu &amp; Ambient</h3><p>If we earn the pit. Shave ice &amp; shoegaze for dessert. Melted everything.</p></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -474,7 +525,7 @@
                         </ul>
                     </div>
                     <div class="plain-card">
-                        <h3>Be boring, legally</h3>
+                        <h3>Keep it boring</h3>
                         <ul>
                             <li>No ticket sales, no public ads</li>
                             <li>BYO / share — no alcohol sales</li>
@@ -491,27 +542,27 @@
             <div class="container">
                 <h2 class="fade-in">Getting There</h2>
                 <div class="location-content fade-in">
-                    <div class="location-info">
+                    <div class="location-info panel">
                         <h3>Hanalei, Kauaʻi</h3>
-                        <p>Fly into Līhuʻe (LIH). About an hour to Hanalei — one-lane bridges, no rushing. June is dry-season trades.</p>
-                        <p>Hāʻena State Park needs a reservation if you're going past the end of the road. Exact base camp goes to confirmed attendees only.</p>
-                        <p style="font-size:0.85rem;opacity:0.7;"><em>Map is the bay, not the address.</em></p>
+                        <p>Fly into Līhuʻe (LIH). About an hour to Hanalei — one-lane bridges, no rushing. June is shoulder-to-dry on the North Shore; still bring a rain layer.</p>
+                        <p>Hāʻena State Park needs a reservation if you're going past the end of the road (Tunnels). Exact base camp goes to confirmed attendees only.</p>
+                        <p style="font-size:0.85rem;opacity:0.7;margin:0;"><em>Map is the bay, not the address.</em></p>
                     </div>
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14800!2d-159.50!3d22.21!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c06f0c0c0c0c0c1%3A0x0!2sHanalei%20Bay!5e0!3m2!1sen!2sus!4v1736441800000" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe title="Map of Hanalei Bay, Kauaʻi" src="https://maps.google.com/maps?q=Hanalei+Bay,+Kauai,+Hawaii&amp;z=13&amp;output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="accommodations" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/billroland_lanai.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Stay</h2>
                 <p class="section-subtitle fade-in">Primary plan is the base-camp buyout. Rentals are for sleeping — not for the party.</p>
                 <div class="card-grid fade-in">
                     <div class="plain-card"><h3>Base camp</h3><p>Bunks and tents on the site we book. This is the move. TBA until the venue letter lands.</p></div>
-                    <div class="plain-card"><h3>Hanalei / Princeville</h3><p>If you want your own bed: <a href="https://www.airbnb.com/s/Hanalei--Hawaii--United-States/homes?checkin=2027-06-09&amp;checkout=2027-06-14&amp;adults=2" target="_blank">browse rentals</a>. No events at rentals. That's how you get shut down.</p></div>
+                    <div class="plain-card"><h3>Hanalei / Princeville</h3><p>If you want your own bed: <a href="https://www.airbnb.com/s/Hanalei--Hawaii--United-States/homes?checkin=2027-06-09&amp;checkout=2027-06-14&amp;adults=2" target="_blank" rel="noopener">browse rentals</a>. No events at rentals. That's how you get shut down.</p></div>
                 </div>
             </div>
         </section>
@@ -520,29 +571,39 @@
             <div class="section-bg" id="photos-section-bg"></div>
             <div class="container">
                 <h2 class="fade-in">Concept Gallery</h2>
-                <p class="section-subtitle fade-in">Concept renders — the crew, transported. Not real (yet).</p>
+                <p class="section-subtitle fade-in">Concept renders — likenesses of real friends, transported. Not a documentary, and not real (yet). Any one image can come down.</p>
                 <div class="event-toggle fade-in">
-                    <button class="event-tab active" data-event="concept">Concept</button>
-                    <button class="event-tab" data-event="spring">2k crew</button>
-                    <button class="event-tab" data-event="nine">9k crew</button>
+                    <button class="event-tab active" type="button" data-event="concept">Concept</button>
+                    <button class="event-tab" type="button" data-event="spring">2k crew · real</button>
+                    <button class="event-tab" type="button" data-event="nine">9k crew · real</button>
                 </div>
                 <div class="carousel-container fade-in">
-                    <div class="main-photo-container"><img id="main-photo" src="" alt="zer0K concept photo"></div>
+                    <div class="main-photo-container" id="main-photo-wrap" title="Click to enlarge">
+                        <img id="main-photo" src="" alt="zer0K concept photo">
+                        <span class="photo-hint">Click to enlarge · concept render</span>
+                    </div>
                     <div class="thumbnail-wrapper">
-                        <button class="scroll-arrow left-arrow" id="scroll-photo-left" aria-label="Scroll left">&lt;</button>
+                        <button class="scroll-arrow left-arrow" type="button" id="scroll-photo-left" aria-label="Scroll left">&lt;</button>
                         <div class="carousel-thumbnails" id="photo-thumbnails"></div>
-                        <button class="scroll-arrow right-arrow" id="scroll-photo-right" aria-label="Scroll right">&gt;</button>
+                        <button class="scroll-arrow right-arrow" type="button" id="scroll-photo-right" aria-label="Scroll right">&gt;</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="interest" class="content-section">
+        <section id="interest" class="content-section wash-heavy">
             <div class="section-bg" style="background-image:url('assets/zerok_poster.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Raise Your Hand</h2>
                 <p class="section-subtitle fade-in">Not an RSVP. An interest list. Especially if you have Kauaʻi connections.</p>
-                <form class="form-card fade-in" id="interest-form">
+                <div class="form-card panel fade-in" id="interest-lock">
+                    <p style="margin-bottom:12px;">Attendee password opens the list. Same friendly latch as 2k — not a secret, just a door.</p>
+                    <label for="gate-pass">Password</label>
+                    <input id="gate-pass" type="password" autocomplete="current-password">
+                    <p style="margin-top:20px;text-align:center;"><button type="button" class="btn" id="gate-open">Open the list</button></p>
+                    <p id="gate-err" hidden style="color:var(--sunset);text-align:center;margin-top:10px;font-size:0.88rem;">That password is incorrect. Reach out to Bryan if you need it.</p>
+                </div>
+                <form class="form-card panel fade-in" id="interest-form" hidden>
                     <div class="form-row">
                         <div><label for="iname">Name *</label><input id="iname" name="name" required></div>
                         <div><label for="iemail">Email *</label><input id="iemail" name="email" type="email" required></div>
@@ -559,105 +620,106 @@
                     <textarea id="ikauai" name="kauai" placeholder="Host, land, gear, locals, production house, anything…"></textarea>
                     <label for="iinst">Instruments you'd fly with</label>
                     <input id="iinst" name="instruments">
-                    <p style="margin:14px 0 4px;font-size:0.82rem;color:var(--text-dim);">Roles you'd take</p>
-                    <div class="check-grid">
-                        <label><input type="checkbox" name="role" value="sound"> Sound</label>
-                        <label><input type="checkbox" name="role" value="kitchen"> Kitchen</label>
-                        <label><input type="checkbox" name="role" value="ocean"> Ocean safety</label>
-                        <label><input type="checkbox" name="role" value="oly"> Ocean-lympics</label>
-                    </div>
+                    <fieldset style="border:0;margin:14px 0 0;padding:0;">
+                        <legend style="font-size:0.82rem;letter-spacing:0.6px;color:var(--text-dim);">Roles you'd take</legend>
+                        <div class="check-grid">
+                            <label><input type="checkbox" name="role" value="sound"> Sound</label>
+                            <label><input type="checkbox" name="role" value="kitchen"> Kitchen</label>
+                            <label><input type="checkbox" name="role" value="ocean"> Ocean safety</label>
+                            <label><input type="checkbox" name="role" value="oly"> Oceanlympics</label>
+                        </div>
+                    </fieldset>
                     <label for="inotes">Anything else</label>
                     <textarea id="inotes" name="notes"></textarea>
                     <p style="margin-top:20px;text-align:center;"><button type="submit" class="btn">Send to Bryan</button></p>
-                    <p style="font-size:0.78rem;color:var(--text-dim);text-align:center;margin-top:10px;">Opens a mailto. Password-gated like 2k RSVP.</p>
+                    <p style="font-size:0.78rem;color:var(--text-dim);text-align:center;margin-top:10px;">Opens your email app with the answers filled in.</p>
+                    <div class="mail-fallback" id="mail-fallback" hidden>
+                        <p>If nothing opened: <a id="mail-link" href="#">tap to try again</a> · <button type="button" class="btn btn-outline" id="mail-copy" style="margin-top:8px;font-size:0.95rem;">Copy the message</button></p>
+                    </div>
                 </form>
             </div>
         </section>
 
-        <section id="logistics" class="content-section">
+        <section id="logistics" class="content-section wash-heavy">
             <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">FAQ</h2>
                 <div class="card-grid fade-in">
-                    <div class="plain-card"><h3>Cost</h3><p>Free, but you contribute — a set, a meal, a role, ingredients. Same as 2k.</p></div>
-                    <div class="plain-card"><h3>Not a musician?</h3><p>Even better. Diatonic kit, ocean events, kitchen, glow swim.</p></div>
-                    <div class="plain-card"><h3>Bring</h3><p>Reef-safe sunscreen, rash guard, headlamp, one instrument, reusable cup, layers for night trades.</p></div>
-                    <div class="plain-card"><h3>Noise</h3><p>One loud night, published end time. Complaint-driven island. Don't be the reason.</p></div>
+                    <div class="plain-card"><h3>Cost</h3><p>Free, but you contribute — a set, a meal, a role, ingredients. Same as 2k. Getting there is on you: figure a LIH flight, a shared car, and a food chip-in.</p></div>
+                    <div class="plain-card"><h3>Kids?</h3><p>Yes if they participate. Ocean days need a grown-up who can swim with them. Night swim is optional and called if the water is ugly.</p></div>
+                    <div class="plain-card"><h3>Not a musician?</h3><p>Even better. Can't-hit-a-wrong-note kit, ocean events, kitchen, glow swim.</p></div>
+                    <div class="plain-card"><h3>Bring</h3><p>Reef-safe sunscreen, rash guard, headlamp, one instrument, reusable cup, a rain layer for night trades.</p></div>
+                    <div class="plain-card"><h3>Weather</h3><p>June is better than winter on the North Shore, not a drought. Pack for sun and a squall.</p></div>
+                    <div class="plain-card"><h3>Noise &amp; drinks</h3><p>One loud night, published end time. BYO / share — nobody's selling alcohol. Don't be the reason the neighbors call.</p></div>
                 </div>
             </div>
         </section>
 
         <section id="sister-fests" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/ninek_beach_family.jpg');"></div>
+            <div class="section-bg" style="background-image:url('assets/crew_pier_walk.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Three Houses. Three Elevations.</h2>
-                <div class="sister-stat-grid fade-in">
-                    <div class="sister-stat"><div class="num">9k</div><div class="lbl"><a href="https://9kfest.com" target="_blank">9kfest.com</a> · August · Colorado</div></div>
-                    <div class="sister-stat"><div class="num">2k</div><div class="lbl"><a href="https://2kfest.com">2kfest.com</a> · Fall · California</div></div>
-                    <div class="sister-stat"><div class="num"><span class="z0">0</span>k</div><div class="lbl">You are here · June · Kauaʻi</div></div>
+                <p class="section-subtitle fade-in">Same federation. No spectators. Only participants.</p>
+                <div class="sister-grid fade-in">
+                    <a class="site-card sister-card" href="https://9kfest.com" target="_blank" rel="noopener">
+                        <div class="site-card-bg" style="background-image:url('assets/9k/feature_1.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">9,000 ft</p><div class="num">9k</div><p>Cuchara, CO · August. The mountain house that started it.</p></div>
+                    </a>
+                    <a class="site-card sister-card" href="https://2kfest.com">
+                        <div class="site-card-bg" style="background-image:url('https://2kfest.com/spring26/outdoorcircle.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">2,000 ft</p><div class="num">2k</div><p>Murphys, CA · Fall. Foothills, no neighbors, no noise complaints.</p></div>
+                    </a>
+                    <div class="site-card sister-card">
+                        <div class="site-card-bg" style="background-image:url('assets/saxes_on_sand.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">0 ft</p><div class="num">0k</div><p>You are here · June · Kauaʻi. Sea-level chapter, venue in progress.</p></div>
+                    </div>
                 </div>
-                <p class="fade-in" style="text-align:center;"><a href="https://2kfest.com/ijhf/">International Jam House Federation</a> — no spectators. Only participants.</p>
+                <p class="fade-in" style="text-align:center;"><a href="https://2kfest.com/ijhf/">International Jam House Federation</a></p>
             </div>
         </section>
     </main>
 
-    <div id="photo-modal" class="modal">
-        <span class="modal-close">&times;</span>
-        <a class="modal-prev">&#10094;</a>
-        <img id="modal-img" alt="">
-        <a class="modal-next">&#10095;</a>
+    <div id="photo-modal" class="modal" role="dialog" aria-modal="true" aria-label="Photo">
+        <button type="button" class="modal-close" aria-label="Close">&times;</button>
+        <button type="button" class="modal-prev" aria-label="Previous">&#10094;</button>
+        <figure>
+            <img id="modal-img" alt="">
+            <figcaption id="modal-cap">Concept render</figcaption>
+        </figure>
+        <button type="button" class="modal-next" aria-label="Next">&#10095;</button>
     </div>
 
     <footer>
-        <p>&copy; <span id="current-year">2026</span> zer<span class="z0">0</span>K · <a href="https://2kfest.com/ijhf/">IJHF</a> · <a href="https://www.instagram.com/twokfest/" target="_blank">@twokfest</a></p>
-        <p style="margin-top:10px;"><a href="#interest" class="rsvp-gate-link" style="color:var(--text-dim);font-size:0.78rem;">Raise your hand →</a></p>
+        <p>&copy; <span id="current-year">2026</span> zer<span class="z0">0</span>K · <a href="https://2kfest.com/ijhf/">IJHF</a> · <a href="https://www.instagram.com/twokfest/" target="_blank" rel="noopener">@twokfest</a></p>
+        <p style="margin-top:10px;"><a href="#interest" style="color:var(--text-dim);font-size:0.78rem;">Raise your hand →</a></p>
     </footer>
 
     <script>
-    (function () {
-        var links = document.querySelectorAll('.rsvp-gate-link');
-        var expected = atob('bm9kcm9wZA==');
-        links.forEach(function (link) {
-            link.addEventListener('click', function (e) {
-                if (link.getAttribute('href') === '#interest' && document.getElementById('interest-form')) {
-                    /* still gate first visit */
-                }
-                e.preventDefault();
-                var entry = window.prompt('Enter the attendee password:');
-                if (entry === null) return;
-                if (entry.trim().toLowerCase() === expected) {
-                    if (link.getAttribute('href').indexOf('#') === 0) {
-                        document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        window.location.href = link.getAttribute('href');
-                    }
-                } else {
-                    window.alert('Sorry, that password is incorrect. Reach out to Bryan if you need it.');
-                }
-            });
-        });
-    })();
-
     document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-        document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        }));
+        const navLinks = document.getElementById('nav-links');
+        function setNavOpen(open) {
+            hamburger.classList.toggle('active', open);
+            navLinks.classList.toggle('active', open);
+            hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        hamburger.addEventListener('click', () => setNavOpen(!navLinks.classList.contains('active')));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            const io = new IntersectionObserver((ents) => {
-                ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-            }, { threshold: 0.08 });
-            io.observe(el);
-        });
+        if (!reduceMotion) {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const io = new IntersectionObserver((ents) => {
+                    ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+                }, { threshold: 0.08 });
+                io.observe(el);
+            });
+        } else {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        }
 
         document.querySelectorAll('.flow-tab').forEach(tab => {
             tab.addEventListener('click', () => {
@@ -694,76 +756,81 @@
                 document.getElementById('cd-secs').textContent = pad(s);
                 return true;
             }
-            if (tick()) {
+            if (tick() && !reduceMotion) {
                 const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000);
             }
         })();
 
         const photoSets = {
             concept: [
-                'assets/ninek_pier_crew.jpg',
-                'assets/ninek_shaka_bay.jpg',
-                'assets/ninek_beach_family.jpg',
-                'assets/ninek_guitar_duo_sand.jpg',
-                'assets/ninek_glow_beach.jpg',
-                'assets/crew_pier_walk.jpg',
-                'assets/saxes_on_sand.jpg',
-                'assets/nathan_taro_stage.jpg',
-                'assets/billroland_lanai.jpg',
-                'assets/dash_beach_openmic.jpg',
-                'assets/john_imu_night.jpg',
-                'assets/oceanlympics_snorkel.jpg',
-                'assets/night_glow_swim.jpg',
-                'assets/sunrise_summit.jpg',
-                'assets/lanai_jam_dog.jpg',
-                'assets/zerok_poster.jpg',
+                { src: 'assets/crew_pier_walk.jpg', alt: 'Pier walk with guitar, concept' },
+                { src: 'assets/saxes_on_sand.jpg', alt: 'Saxes on the sand, concept' },
+                { src: 'assets/nathan_taro_stage.jpg', alt: 'Taro-field stage, concept' },
+                { src: 'assets/ninek_glow_beach.jpg', alt: 'Glow beach night, concept' },
+                { src: 'assets/dash_beach_openmic.jpg', alt: 'Beach open mic, concept' },
+                { src: 'assets/night_glow_swim.jpg', alt: 'Night glow swim, concept' },
+                { src: 'assets/john_imu_night.jpg', alt: 'Imu night, concept' },
+                { src: 'assets/ninek_guitar_duo_sand.jpg', alt: 'Guitar duo on the sand, concept' },
+                { src: 'assets/sunrise_summit.jpg', alt: 'Sunrise summit, concept' },
+                { src: 'assets/billroland_lanai.jpg', alt: 'Lanai jam, concept' },
+                { src: 'assets/oceanlympics_snorkel.jpg', alt: 'Snorkel scavenger, concept' },
+                { src: 'assets/lanai_jam_dog.jpg', alt: 'Lanai jam with dog, concept' },
+                { src: 'assets/ninek_shaka_bay.jpg', alt: 'Shaka at the bay, concept' },
+                { src: 'assets/ninek_pier_crew.jpg', alt: 'Pier crew, concept' },
+                { src: 'assets/ninek_beach_family.jpg', alt: 'Beach family, concept' },
+                { src: 'assets/zerok_poster.jpg', alt: 'zer0K poster, concept' },
             ],
             spring: [
-                'https://2kfest.com/spring26/fullyard.jpg',
-                'https://2kfest.com/spring26/outdoorcircle.jpg',
-                'https://2kfest.com/spring26/saxes.jpg',
-                'https://2kfest.com/spring26/nathan.jpg',
-                'https://2kfest.com/spring26/outdoor_stage_night.jpg',
-                'https://2kfest.com/spring26/billroland.jpg',
-                'https://2kfest.com/spring26/dashponcho.jpg',
-                'https://2kfest.com/spring26/johngab.jpg',
-                'https://2kfest.com/spring26/jamsoutdoors.jpg',
-                'https://2kfest.com/spring26/astro.jpg',
+                { src: 'https://2kfest.com/spring26/fullyard.jpg', alt: '2k yard, real' },
+                { src: 'https://2kfest.com/spring26/outdoorcircle.jpg', alt: '2k outdoor circle, real' },
+                { src: 'https://2kfest.com/spring26/saxes.jpg', alt: '2k saxes, real' },
+                { src: 'https://2kfest.com/spring26/nathan.jpg', alt: '2k Nathan, real' },
+                { src: 'https://2kfest.com/spring26/outdoor_stage_night.jpg', alt: '2k night stage, real' },
+                { src: 'https://2kfest.com/spring26/billroland.jpg', alt: '2k Bill and Roland, real' },
+                { src: 'https://2kfest.com/spring26/dashponcho.jpg', alt: '2k Dash, real' },
+                { src: 'https://2kfest.com/spring26/johngab.jpg', alt: '2k John, real' },
+                { src: 'https://2kfest.com/spring26/jamsoutdoors.jpg', alt: '2k outdoor jam, real' },
+                { src: 'https://2kfest.com/spring26/astro.jpg', alt: '2k astro, real' },
             ],
             nine: [
-                'https://9kfest.com/images/feature_photo_1.jpg',
-                'https://9kfest.com/images/feature_photo_2.jpg',
-                'https://9kfest.com/images/feature_photo_3_everybody_is_a_musician.jpg',
-                'https://9kfest.com/images/feature_photo_4.jpg',
-                'https://9kfest.com/images/feature_photo_5.jpg',
-                'https://9kfest.com/images/headline_photo.jpg',
+                { src: 'assets/9k/feature_1.jpg', alt: '9k hiking crew, real' },
+                { src: 'assets/9k/feature_2.jpg', alt: '9k mountain, real' },
+                { src: 'assets/9k/feature_3.jpg', alt: '9k lanai jam, real' },
+                { src: 'assets/9k/feature_4.jpg', alt: '9k crew, real' },
+                { src: 'assets/9k/feature_5.jpg', alt: '9k gathering, real' },
+                { src: 'assets/9k/headline.jpg', alt: '9k headline, real' },
             ],
         };
         let currentPhotos = photoSets.concept;
+        let currentSet = 'concept';
         let currentPhotoIdx = 0;
         const mainPhoto = document.getElementById('main-photo');
         const photoThumbs = document.getElementById('photo-thumbnails');
         const photosSectionBg = document.getElementById('photos-section-bg');
+        const photoHint = document.querySelector('.photo-hint');
 
+        function itemAt(i) { return currentPhotos[i]; }
         function scrollThumbIntoView(strip, el) {
             if (!strip || !el) return;
             const left = el.offsetLeft - (strip.clientWidth - el.clientWidth) / 2;
-            strip.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+            strip.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? 'auto' : 'smooth' });
         }
         function setPhoto(idx, scroll = false) {
             currentPhotoIdx = idx;
-            const src = currentPhotos[idx];
-            mainPhoto.src = src;
-            if (photosSectionBg) photosSectionBg.style.backgroundImage = `url('${src}')`;
+            const item = itemAt(idx);
+            mainPhoto.src = item.src;
+            mainPhoto.alt = item.alt;
+            if (photosSectionBg) photosSectionBg.style.backgroundImage = `url('${item.src}')`;
+            if (photoHint) photoHint.textContent = currentSet === 'concept' ? 'Click to enlarge · concept render' : 'Click to enlarge · real photo';
             Array.from(photoThumbs.children).forEach((t, i) => t.classList.toggle('active-thumb', i === idx));
             if (scroll) scrollThumbIntoView(photoThumbs, photoThumbs.children[idx]);
         }
         function buildPhotoThumbs() {
             photoThumbs.innerHTML = '';
-            currentPhotos.forEach((file, idx) => {
+            currentPhotos.forEach((item, idx) => {
                 const thumb = document.createElement('img');
-                thumb.src = file;
-                thumb.alt = 'Photo ' + (idx + 1);
+                thumb.src = item.src;
+                thumb.alt = item.alt;
                 thumb.loading = 'lazy';
                 thumb.addEventListener('click', () => setPhoto(idx, true));
                 photoThumbs.appendChild(thumb);
@@ -773,7 +840,8 @@
             tab.addEventListener('click', () => {
                 document.querySelectorAll('#photos .event-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                currentPhotos = photoSets[tab.dataset.event];
+                currentSet = tab.dataset.event;
+                currentPhotos = photoSets[currentSet];
                 buildPhotoThumbs();
                 setPhoto(0);
                 photoThumbs.scrollTo({ left: 0 });
@@ -781,33 +849,73 @@
         });
         buildPhotoThumbs();
         setPhoto(0);
-        document.getElementById('scroll-photo-left').addEventListener('click', () => photoThumbs.scrollBy({ left: -200, behavior: 'smooth' }));
-        document.getElementById('scroll-photo-right').addEventListener('click', () => photoThumbs.scrollBy({ left: 200, behavior: 'smooth' }));
+        const thumbBehavior = reduceMotion ? 'auto' : 'smooth';
+        document.getElementById('scroll-photo-left').addEventListener('click', () => photoThumbs.scrollBy({ left: -200, behavior: thumbBehavior }));
+        document.getElementById('scroll-photo-right').addEventListener('click', () => photoThumbs.scrollBy({ left: 200, behavior: thumbBehavior }));
 
         const modal = document.getElementById('photo-modal');
         const modalImg = document.getElementById('modal-img');
+        const modalCap = document.getElementById('modal-cap');
         let modalIdx = 0;
-        mainPhoto.addEventListener('click', () => {
+        let lastFocus = null;
+        function openModal() {
             modalIdx = currentPhotoIdx;
-            modalImg.src = currentPhotos[modalIdx];
-            modal.style.display = 'flex';
-        });
-        function closeModal() { modal.style.display = 'none'; }
+            const item = itemAt(modalIdx);
+            modalImg.src = item.src;
+            modalImg.alt = item.alt;
+            modalCap.textContent = item.alt;
+            modal.classList.add('is-open');
+            lastFocus = document.activeElement;
+            modal.querySelector('.modal-close').focus();
+        }
+        function closeModal() {
+            modal.classList.remove('is-open');
+            if (lastFocus) lastFocus.focus();
+        }
         function showModal(dir) {
             modalIdx = (modalIdx + dir + currentPhotos.length) % currentPhotos.length;
-            modalImg.src = currentPhotos[modalIdx];
+            const item = itemAt(modalIdx);
+            modalImg.src = item.src;
+            modalImg.alt = item.alt;
+            modalCap.textContent = item.alt;
             setPhoto(modalIdx, true);
         }
+        document.getElementById('main-photo-wrap').addEventListener('click', openModal);
+        document.getElementById('main-photo-wrap').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); } });
         document.querySelector('.modal-close').addEventListener('click', closeModal);
         document.querySelector('.modal-prev').addEventListener('click', () => showModal(-1));
         document.querySelector('.modal-next').addEventListener('click', () => showModal(1));
         modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (!modal.classList.contains('is-open')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') showModal(-1);
+            if (e.key === 'ArrowRight') showModal(1);
+        });
 
-        document.getElementById('interest-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const f = e.target;
+        const GATE_KEY = 'zerok_unlocked';
+        const expected = atob('bm9kcm9wZA==');
+        const lock = document.getElementById('interest-lock');
+        const form = document.getElementById('interest-form');
+        const gateErr = document.getElementById('gate-err');
+        function unlockInterest() {
+            sessionStorage.setItem(GATE_KEY, '1');
+            lock.hidden = true;
+            form.hidden = false;
+        }
+        if (sessionStorage.getItem(GATE_KEY) === '1') unlockInterest();
+        document.getElementById('gate-open').addEventListener('click', () => {
+            const entry = document.getElementById('gate-pass').value.trim().toLowerCase();
+            if (entry === expected) { gateErr.hidden = true; unlockInterest(); }
+            else { gateErr.hidden = false; }
+        });
+        document.getElementById('gate-pass').addEventListener('keydown', e => {
+            if (e.key === 'Enter') { e.preventDefault(); document.getElementById('gate-open').click(); }
+        });
+
+        function formBody(f) {
             const roles = [...f.querySelectorAll('input[name=role]:checked')].map(c => c.value).join(', ');
-            const body = [
+            return [
                 'zer0K interest',
                 'Name: ' + f.name.value,
                 'Email: ' + f.email.value,
@@ -818,7 +926,20 @@
                 'Roles: ' + roles,
                 'Notes: ' + f.notes.value,
             ].join('\n');
-            window.location.href = 'mailto:bgnipp@gmail.com?subject=' + encodeURIComponent('zer0K interest — ' + f.name.value) + '&body=' + encodeURIComponent(body);
+        }
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const body = formBody(e.target);
+            const href = 'mailto:bgnipp@gmail.com?subject=' + encodeURIComponent('zer0K interest — ' + e.target.name.value) + '&body=' + encodeURIComponent(body);
+            const fallback = document.getElementById('mail-fallback');
+            document.getElementById('mail-link').href = href;
+            fallback.hidden = false;
+            window.location.href = href;
+            document.getElementById('mail-copy').onclick = () => {
+                navigator.clipboard.writeText(body).then(() => {
+                    document.getElementById('mail-copy').textContent = 'Copied';
+                });
+            };
         });
     });
     </script>
