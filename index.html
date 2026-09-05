@@ -87,7 +87,6 @@
             position: absolute; inset: 0; background-size: cover;
             background-position: var(--pos, 50% 50%); z-index: 0;
         }
-        #photos > .section-bg { opacity: 0.42; filter: saturate(0.75); }
         .content-section::before {
             content: '';
             position: absolute; inset: 0; z-index: 1;
@@ -104,8 +103,12 @@
             background: linear-gradient(90deg, transparent, var(--teal), var(--sunset), var(--teal), transparent);
             z-index: 3; opacity: 0.5;
         }
-        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
-        .fade-in.visible, .fade-in.ready { opacity: 1; transform: none; }
+        .fade-in { opacity: 1; transform: none; }
+        .fade-in.will-fade {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in.will-fade.visible { opacity: 1; transform: none; }
         .panel {
             background: rgba(8, 18, 32, 0.72);
             backdrop-filter: blur(10px);
@@ -174,33 +177,36 @@
         .header-overlay {
             position: absolute; inset: 0; z-index: 1;
             background:
-                linear-gradient(to top, rgba(6,17,31,0.92) 0%, rgba(6,17,31,0.62) 22%, rgba(6,17,31,0.18) 48%, transparent 68%),
-                radial-gradient(70% 55% at 50% 58%, rgba(6,17,31,0.5) 0%, rgba(6,17,31,0.12) 70%, transparent 100%);
+                linear-gradient(to top, rgba(6,17,31,0.92) 0%, rgba(6,17,31,0.55) 22%, rgba(6,17,31,0.22) 48%, transparent 70%),
+                radial-gradient(58% 48% at 50% 52%, rgba(6,17,31,0.58) 0%, rgba(6,17,31,0.2) 58%, transparent 100%);
         }
         .header-content {
-            position: relative; z-index: 2; max-width: 560px;
-            padding: 20px 22px 24px;
-            border-radius: 20px;
-            background: rgba(6, 17, 31, 0.48);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            position: relative; z-index: 2; max-width: 860px;
         }
-        .hero-logo {
-            width: min(160px, 42vw); height: auto; border-radius: 50%;
-            display: block; margin: 0 auto 14px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+        .header-content h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3.2rem, 8vw, 5.4rem);
+            color: var(--gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.85), 2px 3px 22px rgba(0,0,0,0.75);
+            line-height: 1; letter-spacing: 4px;
+            margin-bottom: 1rem; text-transform: uppercase;
         }
         .header-content .date-span {
             display: block; font-family: var(--font-heading);
-            font-size: clamp(1.2rem, 3.2vw, 1.85rem);
-            letter-spacing: 3px; margin-bottom: 12px; color: var(--sand); text-transform: uppercase;
+            font-size: clamp(1.3rem, 3.4vw, 2rem);
+            letter-spacing: 4px; margin-top: 12px; color: var(--sand); text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 2px 16px rgba(0,0,0,0.7);
         }
-        .header-about-text { max-width: 520px; margin: 0 auto 1.4rem; font-size: 1.05rem; color: var(--sand); }
+        .header-about-text {
+            max-width: 640px; margin: 0 auto 2rem; font-size: 1.1rem;
+            line-height: 1.7; color: var(--sand);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 2px 16px rgba(0,0,0,0.7);
+        }
         .concept-chip {
-            display: inline-block; margin-bottom: 14px; padding: 6px 14px;
+            display: inline-block; margin-bottom: 16px; padding: 6px 14px;
             border: 1px solid var(--border); border-radius: 999px;
             font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
+            text-shadow: 0 1px 8px rgba(0,0,0,0.6);
         }
         .header-buttons { display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .btn {
@@ -247,6 +253,7 @@
         .flow-day p { color: var(--sand); margin: 0; }
 
         .site-grid, .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .card-grid { align-items: start; }
         .card-grid.three { grid-template-columns: repeat(3, 1fr); }
         .site-card, .plain-card {
             border-radius: 14px; overflow: hidden; position: relative;
@@ -368,17 +375,16 @@
                 padding: 12px 16px 16px;
                 background-position: center 22%;
             }
-            .hero-logo { width: 72px; margin-bottom: 6px; }
             .header-about-text { display: none; }
-            .header-content { padding: 10px 14px 12px; max-width: 640px; }
-            .header-content .date-span { font-size: 1.05rem; margin-bottom: 6px; }
-            .concept-chip { margin-bottom: 6px; font-size: 0.62rem; }
+            .header-content h1 { font-size: clamp(2.2rem, 10vw, 3.2rem); margin-bottom: 8px; }
+            .header-content .date-span { font-size: 1.05rem; margin-top: 6px; }
+            .concept-chip { margin-bottom: 8px; font-size: 0.62rem; }
             .scroll-hint { display: none; }
             .map-container { height: 180px; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .fade-in { opacity: 1; transform: none; transition: none; }
+            .fade-in, .fade-in.will-fade { opacity: 1; transform: none; transition: none; }
             #navbar .nav-links { transition: none; }
         }
     </style>
@@ -389,7 +395,7 @@
         "name": "zer0K",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "description": "An invite-only music camp at sea level on Kauaʻi's North Shore. Venue and dates TBA.",
-        "image": "https://zerokfest.com/assets/zerok_poster.jpg",
+        "image": "https://zerokfest.com/assets/logo.png",
         "url": "https://zerokfest.com/",
         "isAccessibleForFree": true,
         "location": {
@@ -423,8 +429,7 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <p class="concept-chip">Concept · venue and dates TBA</p>
-            <img class="hero-logo" src="assets/logo.png" alt="zer0K" width="512" height="512">
-            <p class="date-span">June 2027 · Hanalei, Kauaʻi</p>
+            <h1>zer<span class="z0">0</span>K<span class="date-span">June 2027 · Hanalei, Kauaʻi</span></h1>
             <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. An invite-only music camp at sea level — everyone jams, everyone swims, everyone cooks.</p>
             <div class="header-buttons">
                 <a href="#interest" class="btn">Raise Your Hand</a>
@@ -438,11 +443,11 @@
             <div class="section-bg" style="background-image:url('assets/crew_pier_walk.jpg'); --pos:50% 28%;"></div>
             <div class="container">
                 <h2 class="fade-in">Sea Level</h2>
-                <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer<span class="z0">0</span>K is the base camp — five nights on Kauaʻi's North Shore.</p>
+                <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer0K is the base camp — five nights on Kauaʻi's North Shore.</p>
                 <div class="stat-grid fade-in">
                     <div class="stat"><div class="num">9,000 ft</div><div class="lbl">9k Fest · Cuchara, CO · August</div></div>
                     <div class="stat"><div class="num">2,000 ft</div><div class="lbl">2k Fest · Murphys, CA · Fall</div></div>
-                    <div class="stat"><div class="num">0 ft</div><div class="lbl">zer<span class="z0">0</span>K · Hanalei, HI · June</div></div>
+                    <div class="stat"><div class="num">0 ft</div><div class="lbl">zer0K · Hanalei, HI · June</div></div>
                 </div>
                 <p class="fade-in panel" style="max-width:720px;margin:0 auto;text-align:center;">If you already know 2k or 9k: same house rules, salt water. If you don't: it's a private, ticket-free music camp. Community-cooked meals, open jams, a playful competition track, and a hard rule — <em>no spectators, only participants.</em> No owned land yet. June is the working window — not a lock.</p>
             </div>
@@ -453,20 +458,20 @@
             <div class="container">
                 <h2 class="fade-in">The Flow</h2>
                 <p class="section-subtitle fade-in">A shape, not a lineup. Subject to tides. Should not be trusted or believed.</p>
-                <div class="flow-tabs fade-in" role="tablist">
-                    <button class="flow-tab active" type="button" data-day="wed">Wed <small>Arrive</small></button>
-                    <button class="flow-tab" type="button" data-day="thu">Thu <small>Ocean I</small></button>
-                    <button class="flow-tab" type="button" data-day="fri">Fri <small>Loud night</small></button>
-                    <button class="flow-tab" type="button" data-day="sat">Sat <small>Ocean II</small></button>
-                    <button class="flow-tab" type="button" data-day="sun">Sun <small>Pau hana</small></button>
-                    <button class="flow-tab" type="button" data-day="mon">Mon <small>Breakdown</small></button>
+                <div class="flow-tabs fade-in" role="tablist" aria-label="The Flow">
+                    <button class="flow-tab active" type="button" role="tab" id="tab-wed" data-day="wed" aria-selected="true" aria-controls="flow-wed">Wed <small>Arrive</small></button>
+                    <button class="flow-tab" type="button" role="tab" id="tab-thu" data-day="thu" aria-selected="false" aria-controls="flow-thu" tabindex="-1">Thu <small>Ocean I</small></button>
+                    <button class="flow-tab" type="button" role="tab" id="tab-fri" data-day="fri" aria-selected="false" aria-controls="flow-fri" tabindex="-1">Fri <small>Loud night</small></button>
+                    <button class="flow-tab" type="button" role="tab" id="tab-sat" data-day="sat" aria-selected="false" aria-controls="flow-sat" tabindex="-1">Sat <small>Ocean II</small></button>
+                    <button class="flow-tab" type="button" role="tab" id="tab-sun" data-day="sun" aria-selected="false" aria-controls="flow-sun" tabindex="-1">Sun <small>Pau hana</small></button>
+                    <button class="flow-tab" type="button" role="tab" id="tab-mon" data-day="mon" aria-selected="false" aria-controls="flow-mon" tabindex="-1">Mon <small>Breakdown</small></button>
                 </div>
-                <div class="flow-day panel active fade-in" id="flow-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
-                <div class="flow-day panel" id="flow-thu"><h3>Oceanlympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Night glow swim if the water is calm. Dinner pairing: poke and post-rock. Acoustic after dark.</p></div>
-                <div class="flow-day panel" id="flow-fri"><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
-                <div class="flow-day panel" id="flow-sat"><h3>Oceanlympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the house allows.</p></div>
-                <div class="flow-day panel" id="flow-sun"><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Championship playoff. Talent show. Imu night if we earn it. Then we're done being loud.</p></div>
-                <div class="flow-day panel" id="flow-mon"><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
+                <div class="flow-day panel active fade-in" id="flow-wed" role="tabpanel" aria-labelledby="tab-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
+                <div class="flow-day panel" id="flow-thu" role="tabpanel" aria-labelledby="tab-thu" hidden><h3>Oceanlympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Night glow swim if the water is calm. Dinner pairing: poke and post-rock. Acoustic after dark.</p></div>
+                <div class="flow-day panel" id="flow-fri" role="tabpanel" aria-labelledby="tab-fri" hidden><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
+                <div class="flow-day panel" id="flow-sat" role="tabpanel" aria-labelledby="tab-sat" hidden><h3>Oceanlympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the house allows.</p></div>
+                <div class="flow-day panel" id="flow-sun" role="tabpanel" aria-labelledby="tab-sun" hidden><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Talent show. Imu night if we earn it. Then we're done being loud.</p></div>
+                <div class="flow-day panel" id="flow-mon" role="tabpanel" aria-labelledby="tab-mon" hidden><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
             </div>
         </section>
 
@@ -594,6 +599,7 @@
             <div class="section-bg" style="background-image:url('assets/ninek_pier_crew.jpg'); --pos:50% 12%;"></div>
             <div class="container">
                 <h2 class="fade-in">Getting There</h2>
+                <p class="section-subtitle fade-in">Līhuʻe to the bay. One-lane bridges, no rushing.</p>
                 <div class="location-content fade-in">
                     <div class="location-info panel">
                         <h3>Hanalei, Kauaʻi</h3>
@@ -621,7 +627,6 @@
         </section>
 
         <section id="photos" class="content-section">
-            <div class="section-bg" id="photos-section-bg"></div>
             <div class="container">
                 <h2 class="fade-in">Concept Gallery</h2>
                 <p class="section-subtitle fade-in">Concept renders of real friends. Not a documentary. Not real yet.</p>
@@ -632,7 +637,7 @@
                 </div>
                 <div class="carousel-container fade-in">
                     <div class="main-photo-container" id="main-photo-wrap" title="Click to enlarge" tabindex="0">
-                        <img id="main-photo" src="" alt="zer0K concept photo">
+                        <img id="main-photo" src="assets/crew_pier_walk.jpg" alt="Pier walk with guitar, concept">
                         <span class="photo-hint">Click to enlarge · concept render</span>
                     </div>
                     <div class="thumbnail-wrapper">
@@ -685,9 +690,10 @@
                     <label for="inotes">Anything else</label>
                     <textarea id="inotes" name="notes"></textarea>
                     <p style="margin-top:20px;text-align:center;"><button type="submit" class="btn">Send to Bryan</button></p>
-                    <p style="font-size:0.78rem;color:var(--text-dim);text-align:center;margin-top:10px;">Opens your email app with the answers filled in.</p>
+                    <p style="font-size:0.78rem;color:var(--text-dim);text-align:center;margin-top:10px;">Opens your email app with the answers filled in. If nothing opens, copy the message.</p>
+                    <p style="text-align:center;margin-top:10px;"><button type="button" class="btn btn-outline" id="mail-copy" style="font-size:0.95rem;">Copy the message</button></p>
                     <div class="mail-fallback" id="mail-fallback" hidden>
-                        <p>If nothing opened: <a id="mail-link" href="#">tap to try again</a> · <button type="button" class="btn btn-outline" id="mail-copy" style="margin-top:8px;font-size:0.95rem;">Copy the message</button></p>
+                        <p>If nothing opened: <a id="mail-link" href="#">tap to try again</a></p>
                     </div>
                 </form>
             </div>
@@ -697,9 +703,9 @@
             <div class="section-bg" style="background-image:url('assets/oceanlympics_snorkel.jpg'); --pos:50% 72%;"></div>
             <div class="container">
                 <h2 class="fade-in">FAQ</h2>
+                <p class="section-subtitle fade-in">The short version.</p>
                 <div class="card-grid fade-in">
                     <div class="plain-card"><h3>Cost</h3><p>Free, but you contribute — a set, a meal, a role, ingredients. Same as 2k. Getting there is on you: figure a LIH flight, a shared car, and a food chip-in.</p></div>
-                    <div class="plain-card"><h3>Noise &amp; drinks</h3><p>One loud night. BYO. Nobody's selling.</p></div>
                     <div class="plain-card"><h3>Not a musician?</h3><p>Even better. Can't-hit-a-wrong-note kit, ocean events, kitchen, glow swim.</p></div>
                     <div class="plain-card"><h3>Bring</h3><p>Reef-safe sunscreen, rash guard, headlamp, one instrument, reusable cup, a rain layer for night trades.</p></div>
                     <div class="plain-card"><h3>Weather</h3><p>June is better than winter on the North Shore, not a drought. Pack for sun and a squall.</p></div>
@@ -718,7 +724,7 @@
                         <div class="site-card-bg" style="background-image:url('assets/9k/feature_2.jpg'); --pos:50% 50%;"></div>
                         <div class="site-card-content"><p class="tba">9,000 ft</p><div class="num">9k</div><p>Cuchara, CO · August. The mountain house that started it.</p></div>
                     </a>
-                    <a class="site-card sister-card" href="https://2kfest.com">
+                    <a class="site-card sister-card" href="https://2kfest.com" target="_blank" rel="noopener">
                         <div class="site-card-bg" style="background-image:url('assets/2k/outdoorcircle.jpg'); --pos:50% 35%;"></div>
                         <div class="site-card-content"><p class="tba">2,000 ft</p><div class="num">2k</div><p>Murphys, CA · Fall. Foothills, no neighbors, no noise complaints.</p></div>
                     </a>
@@ -760,6 +766,7 @@
             hamburger.classList.toggle('active', open);
             navLinks.classList.toggle('active', open);
             hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.style.overflow = open ? 'hidden' : '';
             if (navBackdrop) {
                 navBackdrop.classList.toggle('is-on', open);
                 navBackdrop.hidden = !open;
@@ -769,27 +776,60 @@
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
         if (navBackdrop) navBackdrop.addEventListener('click', () => setNavOpen(false));
 
-        const reveal = () => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
         if (!reduceMotion) {
+            const fold = window.innerHeight;
             document.querySelectorAll('.fade-in').forEach(el => {
+                if (el.getBoundingClientRect().top <= fold) return;
+                el.classList.add('will-fade');
                 const io = new IntersectionObserver((ents) => {
                     ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
                 }, { threshold: 0.08 });
                 io.observe(el);
             });
-            setTimeout(reveal, 900);
-        } else {
-            reveal();
         }
 
-        document.querySelectorAll('.flow-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.flow-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.flow-day').forEach(d => d.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById('flow-' + tab.dataset.day).classList.add('active');
+        const flowTabs = [...document.querySelectorAll('.flow-tab')];
+        function activateFlow(tab, focusTab) {
+            flowTabs.forEach(t => {
+                const on = t === tab;
+                t.classList.toggle('active', on);
+                t.setAttribute('aria-selected', on ? 'true' : 'false');
+                t.tabIndex = on ? 0 : -1;
             });
+            document.querySelectorAll('.flow-day').forEach(d => {
+                const on = d.id === 'flow-' + tab.dataset.day;
+                d.classList.toggle('active', on);
+                d.hidden = !on;
+            });
+            if (focusTab) tab.focus();
+        }
+        flowTabs.forEach(tab => tab.addEventListener('click', () => activateFlow(tab)));
+        document.querySelector('.flow-tabs').addEventListener('keydown', e => {
+            const i = flowTabs.indexOf(document.activeElement);
+            if (i < 0) return;
+            let next = -1;
+            if (e.key === 'ArrowRight') next = (i + 1) % flowTabs.length;
+            if (e.key === 'ArrowLeft') next = (i - 1 + flowTabs.length) % flowTabs.length;
+            if (e.key === 'Home') next = 0;
+            if (e.key === 'End') next = flowTabs.length - 1;
+            if (next < 0) return;
+            e.preventDefault();
+            activateFlow(flowTabs[next], true);
         });
+
+        const navAnchors = [...navLinks.querySelectorAll('a')];
+        const spyTargets = navAnchors.map(a => {
+            const id = (a.getAttribute('href') || '').slice(1);
+            return { a, el: document.getElementById(id) };
+        }).filter(t => t.el);
+        function spyNav() {
+            const y = 140;
+            let current = null;
+            spyTargets.forEach(t => { if (t.el.getBoundingClientRect().top <= y) current = t.a; });
+            navAnchors.forEach(a => a.classList.toggle('active', a === current));
+        }
+        window.addEventListener('scroll', spyNav, { passive: true });
+        spyNav();
 
         const PHOTO_POS = {
             'crew_pier_walk.jpg': '50% 28%',
@@ -832,7 +872,6 @@
                 { src: 'assets/lanai_jam_dog.jpg', alt: 'Lanai jam with dog, concept' },
                 { src: 'assets/ninek_shaka_bay.jpg', alt: 'Shaka at the bay, concept' },
                 { src: 'assets/ninek_pier_crew.jpg', alt: 'Pier crew, concept' },
-                { src: 'assets/ninek_beach_family.jpg', alt: 'Beach family, concept' },
                 { src: 'assets/zerok_poster.jpg', alt: 'zer0K poster, concept' },
             ],
             spring: [
@@ -912,6 +951,11 @@
         const modalCap = document.getElementById('modal-cap');
         let modalIdx = 0;
         let lastFocus = null;
+        const modalChrome = [document.getElementById('navbar'), document.getElementById('home'), document.querySelector('main'), document.querySelector('footer')];
+        const modalButtons = [...modal.querySelectorAll('button')];
+        function setChromeHidden(on) {
+            modalChrome.forEach(el => { if (el) el.setAttribute('aria-hidden', on ? 'true' : 'false'); });
+        }
         function openModal() {
             modalIdx = currentPhotoIdx;
             const item = itemAt(modalIdx);
@@ -920,10 +964,12 @@
             modalCap.textContent = item.alt;
             modal.classList.add('is-open');
             lastFocus = document.activeElement;
+            setChromeHidden(true);
             modal.querySelector('.modal-close').focus();
         }
         function closeModal() {
             modal.classList.remove('is-open');
+            setChromeHidden(false);
             if (lastFocus) lastFocus.focus();
         }
         function showModal(dir) {
@@ -941,10 +987,21 @@
         document.querySelector('.modal-next').addEventListener('click', () => showModal(1));
         modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
         document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                setNavOpen(false);
+                hamburger.focus();
+                return;
+            }
             if (!modal.classList.contains('is-open')) return;
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') { closeModal(); return; }
             if (e.key === 'ArrowLeft') showModal(-1);
             if (e.key === 'ArrowRight') showModal(1);
+            if (e.key === 'Tab' && modalButtons.length) {
+                const first = modalButtons[0];
+                const last = modalButtons[modalButtons.length - 1];
+                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
         });
 
         const GATE_KEY = 'zerok_unlocked';
@@ -989,11 +1046,13 @@
             document.getElementById('mail-link').href = href;
             fallback.hidden = false;
             window.location.href = href;
-            document.getElementById('mail-copy').onclick = () => {
-                navigator.clipboard.writeText(body).then(() => {
-                    document.getElementById('mail-copy').textContent = 'Copied';
-                });
-            };
+        });
+        const mailCopy = document.getElementById('mail-copy');
+        mailCopy.addEventListener('click', () => {
+            navigator.clipboard.writeText(formBody(form)).then(() => {
+                mailCopy.textContent = 'Copied';
+                setTimeout(() => { mailCopy.textContent = 'Copy the message'; }, 2000);
+            });
         });
     });
     </script>
