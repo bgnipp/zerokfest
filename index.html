@@ -99,7 +99,7 @@
         .content-section > .container { position: relative; z-index: 2; }
         .content-section + .content-section::after {
             content: '';
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
             width: min(60%, 400px); height: 1px;
             background: linear-gradient(90deg, transparent, var(--teal), var(--sunset), var(--teal), transparent);
             z-index: 3; opacity: 0.5;
@@ -456,7 +456,6 @@
         </section>
 
         <section id="schedule" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">The Flow</h2>
                 <p class="section-subtitle fade-in">A shape, not a lineup. Subject to tides. Should not be trusted or believed.</p>
@@ -531,7 +530,6 @@
         </section>
 
         <section id="music" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Sound at Sea Level</h2>
                 <p class="section-subtitle fade-in">Don't fly the California PA. Salt air will eat it.</p>
@@ -570,7 +568,6 @@
         </section>
 
         <section id="kuleana" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Kuleana</h2>
                 <p class="section-subtitle fade-in">We're guests. Hanalei is a small town on one road. Buffer distance and neighbor relations are the whole game.</p>
@@ -598,7 +595,6 @@
         </section>
 
         <section id="location" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Getting There</h2>
                 <div class="location-content fade-in">
@@ -616,7 +612,6 @@
         </section>
 
         <section id="accommodations" class="content-section">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Stay</h2>
                 <p class="section-subtitle fade-in">Primary plan is the base-camp buyout. Rentals are for sleeping — not for the party.</p>
@@ -628,7 +623,7 @@
         </section>
 
         <section id="photos" class="content-section">
-            <div class="section-bg" id="photos-section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
+            <div class="section-bg" id="photos-section-bg"></div>
             <div class="container">
                 <h2 class="fade-in">Concept Gallery</h2>
                 <p class="section-subtitle fade-in">Concept renders of real friends. Not a documentary. Not real yet.</p>
@@ -701,7 +696,6 @@
         </section>
 
         <section id="logistics" class="content-section wash-heavy">
-            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">FAQ</h2>
                 <div class="card-grid fade-in">
@@ -817,7 +811,6 @@
             'zerok_poster.jpg': '50% 18%',
             'feature_1.jpg': '50% 78%',
             'headline.jpg': '50% 78%',
-            'sea_level_line.jpg': '50% 50%',
         };
         function posFor(src) {
             const key = (src || '').split('/').pop();
