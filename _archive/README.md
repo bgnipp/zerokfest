@@ -24,7 +24,9 @@ Not loaded by the live page. Kept so we can regenerate or swap shots without hun
 | `pass2/beach_family.png` | `ninek_beach_family` |
 | `pass2/guitar_duo.png` | `ninek_guitar_duo_sand` |
 | `pass2/glow_crowd.png` | `ninek_glow_beach` |
-| `logo/zerok_circle_logo.png` | nav / hero / favicon |
+| `logo/zerok_circle_logo.png` | first circular synthwave mark (retired) |
+| `logo/zerok_circle_logo_v2.jpg` | current circular fest mark, original export |
+| `logo/zerok_circle_logo_v2.png` | lossless PNG master of the same — do not JPEG this for the live site |
 
 Riley photos were never used and are not here.
 
