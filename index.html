@@ -106,6 +106,21 @@
         #navbar .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
         #navbar .logo { font-family: var(--font-brand); font-size: 1.4rem; color: var(--gold); }
         .logo .nav-date { font-family: var(--font-heading); color: var(--text-dim); font-size: 0.85em; letter-spacing: 2px; margin-left: 8px; }
+        /* Rye has no slashed-zero glyph — draw the cross so every zer0K reads as zero */
+        .z0 { position: relative; display: inline-block; }
+        .z0::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 8%;
+            width: 0.155em;
+            height: 86%;
+            background: currentColor;
+            border-radius: 0.05em;
+            transform: translateX(-50%) rotate(-34deg);
+            pointer-events: none;
+        }
+        .header-content h1 .z0::after { box-shadow: 2px 3px 10px rgba(0,0,0,0.55); }
         #navbar .nav-links { display: flex; list-style: none; gap: 2px; }
         #navbar .nav-links li a {
             color: var(--text-dim); padding: 8px 9px; font-weight: 500;
@@ -116,11 +131,13 @@
         .hamburger .bar { display: block; width: 24px; height: 2px; margin: 5px auto; background: var(--text); }
 
         #home {
-            min-height: 100vh;
+            min-height: calc(100vh - var(--nav-height));
+            margin-top: var(--nav-height);
             display: flex; justify-content: center; align-items: center;
             position: relative; overflow: hidden; text-align: center;
-            padding: calc(var(--nav-height) + 40px) 24px 60px;
-            background: var(--dark) url('assets/zerok_poster.jpg') center / cover no-repeat;
+            padding: 36px 24px 56px;
+            /* cover + top: keep honu heads in frame; crop the poster's bottom type instead */
+            background: var(--dark) url('assets/zerok_poster.jpg') center top / cover no-repeat;
         }
         .header-overlay {
             position: absolute; inset: 0; z-index: 1;
@@ -297,7 +314,7 @@
 <body>
     <nav id="navbar">
         <div class="container">
-            <a href="#home" class="logo">zer0K <span class="nav-date">June '27</span></a>
+            <a href="#home" class="logo" aria-label="zer0K June '27">zer<span class="z0" aria-hidden="true">0</span>K <span class="nav-date">June '27</span></a>
             <ul class="nav-links">
                 <li><a href="#about">Sea Level</a></li>
                 <li><a href="#schedule">Flow</a></li>
@@ -316,7 +333,7 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <p class="concept-chip">Concept · venue in progress · dates locked</p>
-            <h1>zer0K<span class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</span></h1>
+            <h1 aria-label="zer0K">zer<span class="z0" aria-hidden="true">0</span>K<span class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</span></h1>
             <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. The Federation touches down. An invite-only music retreat at sea level — everyone jams, everyone swims, everyone cooks.</p>
             <div class="countdown" id="countdown" role="timer" aria-label="Countdown to zer0K">
                 <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
@@ -326,7 +343,7 @@
             </div>
             <div class="header-buttons">
                 <a href="#interest" class="btn rsvp-gate-link">Raise Your Hand</a>
-                <a href="#about" class="btn btn-outline">What is zer0K</a>
+                <a href="#about" class="btn btn-outline">What is zer<span class="z0">0</span>K</a>
             </div>
         </div>
         <div class="scroll-hint" aria-hidden="true"></div>
@@ -337,11 +354,11 @@
             <div class="section-bg" style="background-image:url('assets/ninek_pier_crew.jpg');"></div>
             <div class="container">
                 <h2 class="fade-in">Sea Level</h2>
-                <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer0K is the base camp — five nights on Kauaʻi's North Shore.</p>
+                <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer<span class="z0">0</span>K is the base camp — five nights on Kauaʻi's North Shore.</p>
                 <div class="stat-grid fade-in">
                     <div class="stat"><div class="num">9,000 ft</div><div class="lbl">9k Fest · Cuchara, CO · August</div></div>
                     <div class="stat"><div class="num">2,000 ft</div><div class="lbl">2k Fest · Murphys, CA · Fall</div></div>
-                    <div class="stat"><div class="num">0 ft</div><div class="lbl">zer0K · Hanalei, HI · June</div></div>
+                    <div class="stat"><div class="num">0 ft</div><div class="lbl">zer<span class="z0">0</span>K · Hanalei, HI · June</div></div>
                 </div>
                 <p class="fade-in" style="max-width:680px;margin:0 auto;text-align:center;color:var(--text-dim);">No tickets. No public ads. Same format as the other houses: community-cooked meals, open jams, a competitive track, and a hard rule — <em>no spectators, only participants.</em> Exact base camp is still being found. Dates are not.</p>
             </div>
@@ -575,7 +592,7 @@
                 <div class="sister-stat-grid fade-in">
                     <div class="sister-stat"><div class="num">9k</div><div class="lbl"><a href="https://9kfest.com" target="_blank">9kfest.com</a> · August · Colorado</div></div>
                     <div class="sister-stat"><div class="num">2k</div><div class="lbl"><a href="https://2kfest.com">2kfest.com</a> · Fall · California</div></div>
-                    <div class="sister-stat"><div class="num">0k</div><div class="lbl">You are here · June · Kauaʻi</div></div>
+                    <div class="sister-stat"><div class="num"><span class="z0">0</span>k</div><div class="lbl">You are here · June · Kauaʻi</div></div>
                 </div>
                 <p class="fade-in" style="text-align:center;"><a href="https://2kfest.com/ijhf/">International Jam House Federation</a> — no spectators. Only participants.</p>
             </div>
@@ -590,7 +607,7 @@
     </div>
 
     <footer>
-        <p>&copy; <span id="current-year">2026</span> zer0K · <a href="https://2kfest.com/ijhf/">IJHF</a> · <a href="https://www.instagram.com/twokfest/" target="_blank">@twokfest</a></p>
+        <p>&copy; <span id="current-year">2026</span> zer<span class="z0">0</span>K · <a href="https://2kfest.com/ijhf/">IJHF</a> · <a href="https://www.instagram.com/twokfest/" target="_blank">@twokfest</a></p>
         <p style="margin-top:10px;"><a href="#interest" class="rsvp-gate-link" style="color:var(--text-dim);font-size:0.78rem;">Raise your hand →</a></p>
     </footer>
 
