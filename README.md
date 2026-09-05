@@ -1,4 +1,4 @@
-# (zer)0k
+# (zer)0K
 
 Invite-only sea-level music camp. Hanalei, Kauaʻi. June 2027. Venue and dates TBA.
 
