@@ -336,21 +336,14 @@
         .sister-card:hover { text-decoration: none; }
         .sister-card .num { font-family: var(--font-heading); font-size: 2rem; color: var(--gold); }
 
-        /* Desktop: zoom out from cover, but not all the way to contain.
-           Pin the bottom so zer0K / Hanalei / date stay in. Crop a little
-           of the top ornament only — honu eyes sit below that. Art left
-           of the card. */
+        /* Desktop: full-bleed poster. Top of the frame sits just above
+           the honu heads. The baked-in type is below the fold — omit it
+           rather than cutting letters in half. */
         @media (min-width: 901px) and (min-height: 700px) {
             #home {
-                background-size: auto 106%;
-                background-position: 12px 100%;
-                justify-content: flex-end;
-                padding: 48px 7vw 56px 24px;
+                background-size: cover;
+                background-position: center 36%;
             }
-            .header-overlay {
-                background: linear-gradient(to right, rgba(6,17,31,0.08) 0%, rgba(6,17,31,0.16) 38%, rgba(6,17,31,0.58) 76%, rgba(6,17,31,0.72) 100%);
-            }
-            .header-content { margin-left: auto; }
         }
         @media (max-width: 900px) {
             #navbar .nav-links {
