@@ -1,6 +1,6 @@
 # zer0K
 
-Invite-only sea-level music retreat. Hanalei, Kauaʻi. June 9–14, 2027.
+Invite-only sea-level music camp. Hanalei, Kauaʻi. June 2027. Venue and dates TBA.
 
 - **Live:** [zerokfest.com](https://zerokfest.com)
 - **Federation:** [2kfest.com](https://2kfest.com) · [9kfest.com](https://9kfest.com) · [IJHF](https://2kfest.com/ijhf/)

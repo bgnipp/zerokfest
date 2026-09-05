@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="color-scheme" content="dark">
     <meta name="theme-color" content="#06111f">
-    <title>zer0K '27 · Hanalei, Kauaʻi · June 9–14</title>
-    <meta name="description" content="zer0K: an invite-only interactive music retreat at sea level. Hanalei, Kauaʻi. June 9–14, 2027. Everyone jams, everyone swims, everyone cooks.">
+    <title>zer0K '27 · Hanalei, Kauaʻi</title>
+    <meta name="description" content="zer0K: an invite-only music camp at sea level. Hanalei, Kauaʻi. June 2027. Everyone jams, everyone swims, everyone cooks.">
     <meta name="robots" content="noindex">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="zer0K '27 · Hanalei, Kauaʻi · June 9–14">
-    <meta property="og:description" content="Nine thousand feet. Two thousand feet. Zero. The Federation touches down. June 9–14, 2027.">
+    <meta property="og:title" content="zer0K '27 · Hanalei, Kauaʻi">
+    <meta property="og:description" content="Nine thousand feet. Two thousand feet. Zero. An invite-only music camp at sea level.">
     <meta property="og:image" content="https://zerokfest.com/assets/logo.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="512">
@@ -20,7 +20,7 @@
 
     <meta name="twitter:card" content="summary">
     <meta property="twitter:title" content="zer0K '27 · Hanalei, Kauaʻi">
-    <meta property="twitter:description" content="An interactive music retreat at sea level. June 9–14, 2027.">
+    <meta property="twitter:description" content="An invite-only music camp at sea level. June 2027.">
     <meta property="twitter:image" content="https://zerokfest.com/assets/logo.png">
 
     <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
@@ -202,14 +202,6 @@
             border: 1px solid var(--border); border-radius: 999px;
             font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
         }
-        .countdown { display: flex; justify-content: center; gap: 12px; margin: 0 auto 1.4rem; flex-wrap: wrap; }
-        .cd-unit {
-            min-width: 64px; padding: 10px 6px; text-align: center;
-            background: rgba(6,17,31,0.5); border: 1px solid var(--border); border-radius: 10px;
-        }
-        .cd-num { font-family: var(--font-heading); font-size: 2.3rem; color: var(--sunset); line-height: 1; }
-        .cd-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
-        .cd-message { margin: 0 auto 1.5rem; font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
         .header-buttons { display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .btn {
             display: inline-block; background: var(--sunset); color: #1a0c08;
@@ -388,9 +380,6 @@
             .header-content { padding: 10px 14px 12px; max-width: 640px; }
             .header-content .date-span { font-size: 1.05rem; margin-bottom: 6px; }
             .concept-chip { margin-bottom: 6px; font-size: 0.62rem; }
-            .countdown { margin: 0 auto 0.7rem; gap: 6px; }
-            .cd-unit { min-width: 48px; padding: 4px 4px; }
-            .cd-num { font-size: 1.45rem; }
             .scroll-hint { display: none; }
             .map-container { height: 180px; }
         }
@@ -405,11 +394,8 @@
         "@context": "https://schema.org",
         "@type": "Festival",
         "name": "zer0K",
-        "startDate": "2027-06-09",
-        "endDate": "2027-06-14",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "description": "An invite-only interactive music retreat at sea level on Kauaʻi's North Shore. Venue TBA.",
+        "description": "An invite-only music camp at sea level on Kauaʻi's North Shore. Venue and dates TBA.",
         "image": "https://zerokfest.com/assets/zerok_poster.jpg",
         "url": "https://zerokfest.com/",
         "isAccessibleForFree": true,
@@ -443,16 +429,10 @@
     <header id="home">
         <div class="header-overlay"></div>
         <div class="header-content">
-            <p class="concept-chip">Concept · venue and dates in progress</p>
+            <p class="concept-chip">Concept · venue and dates TBA</p>
             <img class="hero-logo" src="assets/logo.png" alt="zer0K" width="512" height="512">
-            <p class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</p>
-            <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. An invite-only music retreat at sea level — everyone jams, everyone swims, everyone cooks.</p>
-            <div class="countdown" id="countdown" role="timer" aria-label="Countdown to zer0K">
-                <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
-                <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hrs</span></div>
-                <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">min</span></div>
-                <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">sec</span></div>
-            </div>
+            <p class="date-span">June 2027 · Hanalei, Kauaʻi</p>
+            <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. An invite-only music camp at sea level — everyone jams, everyone swims, everyone cooks.</p>
             <div class="header-buttons">
                 <a href="#interest" class="btn">Raise Your Hand</a>
             </div>
@@ -471,7 +451,7 @@
                     <div class="stat"><div class="num">2,000 ft</div><div class="lbl">2k Fest · Murphys, CA · Fall</div></div>
                     <div class="stat"><div class="num">0 ft</div><div class="lbl">zer<span class="z0">0</span>K · Hanalei, HI · June</div></div>
                 </div>
-                <p class="fade-in panel" style="max-width:720px;margin:0 auto;text-align:center;">If you already know 2k or 9k: same house rules, salt water, no owned land yet. If you don't: it's a private, ticket-free music camp. Community-cooked meals, open jams, a playful competition track, and a hard rule — <em>no spectators, only participants.</em> Exact base camp is still being found. Dates too — June is the working window, not a lock.</p>
+                <p class="fade-in panel" style="max-width:720px;margin:0 auto;text-align:center;">If you already know 2k or 9k: same house rules, salt water. If you don't: it's a private, ticket-free music camp. Community-cooked meals, open jams, a playful competition track, and a hard rule — <em>no spectators, only participants.</em> No owned land yet. June is the working window — not a lock.</p>
             </div>
         </section>
 
@@ -481,17 +461,17 @@
                 <h2 class="fade-in">The Flow</h2>
                 <p class="section-subtitle fade-in">A shape, not a lineup. Subject to tides. Should not be trusted or believed.</p>
                 <div class="flow-tabs fade-in" role="tablist">
-                    <button class="flow-tab active" type="button" data-day="wed">Wed 9 <small>Arrive</small></button>
-                    <button class="flow-tab" type="button" data-day="thu">Thu 10 <small>Ocean I</small></button>
-                    <button class="flow-tab" type="button" data-day="fri">Fri 11 <small>Loud night</small></button>
-                    <button class="flow-tab" type="button" data-day="sat">Sat 12 <small>Ocean II</small></button>
-                    <button class="flow-tab" type="button" data-day="sun">Sun 13 <small>Pau hana</small></button>
-                    <button class="flow-tab" type="button" data-day="mon">Mon 14 <small>Breakdown</small></button>
+                    <button class="flow-tab active" type="button" data-day="wed">Wed <small>Arrive</small></button>
+                    <button class="flow-tab" type="button" data-day="thu">Thu <small>Ocean I</small></button>
+                    <button class="flow-tab" type="button" data-day="fri">Fri <small>Loud night</small></button>
+                    <button class="flow-tab" type="button" data-day="sat">Sat <small>Ocean II</small></button>
+                    <button class="flow-tab" type="button" data-day="sun">Sun <small>Pau hana</small></button>
+                    <button class="flow-tab" type="button" data-day="mon">Mon <small>Breakdown</small></button>
                 </div>
                 <div class="flow-day panel active fade-in" id="flow-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
-                <div class="flow-day panel" id="flow-thu"><h3>Oceanlympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Dinner pairing: poke and post-rock. Acoustic after dark if the neighbors are in the tent.</p></div>
+                <div class="flow-day panel" id="flow-thu"><h3>Oceanlympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Night glow swim if the water is calm. Dinner pairing: poke and post-rock. Acoustic after dark.</p></div>
                 <div class="flow-day panel" id="flow-fri"><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
-                <div class="flow-day panel" id="flow-sat"><h3>Oceanlympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the site allows.</p></div>
+                <div class="flow-day panel" id="flow-sat"><h3>Oceanlympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the house allows.</p></div>
                 <div class="flow-day panel" id="flow-sun"><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Championship playoff. Talent show. Imu night if we earn it. Then we're done being loud.</p></div>
                 <div class="flow-day panel" id="flow-mon"><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
             </div>
@@ -501,14 +481,14 @@
             <div class="section-bg" style="background-image:url('assets/nathan_taro_stage.jpg'); --pos:50% 38%;"></div>
             <div class="container">
                 <h2 class="fade-in">Base Camp</h2>
-                <p class="section-subtitle fade-in">We don't own land here. We're buying buffer distance and neighbor trust — not a vacation-rental party.</p>
+                <p class="section-subtitle fade-in">We don't own land here. Not a vacation-rental party.</p>
                 <div class="site-grid fade-in">
                     <div class="site-card site-card-plain">
                         <div class="site-card-content"><p class="tba">TBA</p><h3>Where we sleep</h3><p>Full-site camp buyout or partner retreat. Bunks + tents. Not a vacation rental.</p></div>
                     </div>
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/saxes_on_sand.jpg'); --pos:50% 8%;"></div>
-                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where it gets loud</h3><p>One night stage with a published end time. Everything else stays unplugged or ocean-based.</p></div>
+                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where it gets loud</h3><p>One night stage with a hard end time. Everything else stays unplugged or ocean-based.</p></div>
                     </div>
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/john_imu_night.jpg'); --pos:50% 10%;"></div>
@@ -526,7 +506,7 @@
             <div class="section-bg" style="background-image:url('assets/night_glow_swim.jpg'); --pos:22% 78%;"></div>
             <div class="container">
                 <h2 class="fade-in">Oceanlympics</h2>
-                <p class="section-subtitle fade-in">The competition track goes saltwater. Teams of 3. Friday + Saturday heats. Sunday playoff. Tunnels needs a Hāʻena reservation.</p>
+                <p class="section-subtitle fade-in">Glowlympics, saltwater. Teams of three. Tunnels needs a Hāʻena reservation.</p>
                 <div class="site-grid fade-in">
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/oceanlympics_snorkel.jpg'); --pos:50% 72%;"></div>
@@ -534,16 +514,16 @@
                     </div>
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/night_glow_swim.jpg'); --pos:22% 78%;"></div>
-                        <div class="site-card-content"><h3>Night glow swim</h3><p>LED bracelets, calm water only. Called off if surf is up. Last team still glowing wins the vibe.</p></div>
+                        <div class="site-card-content"><h3>Night glow swim</h3><p>LED bracelets, calm water only. Called off if surf is up. Last ones still glowing win.</p></div>
                     </div>
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/sunrise_summit.jpg'); --pos:50% 72%;"></div>
-                        <div class="site-card-content"><h3>Sunrise summit</h3><p>Okolehao Trail. First three at the overlook get the seed pick.</p></div>
+                        <div class="site-card-content"><h3>Sunrise summit</h3><p>Okolehao Trail. First three at the overlook pick their Oceanlympics seed.</p></div>
                     </div>
                     <div class="site-card site-card-plain">
                         <div class="site-card-content">
                             <h3>Also in the mix</h3>
-                            <p>SUP / outrigger relay in the bay. Tide-pool treasure — look, don't take. Sand mini golf + coconut bocce, because we still need a putting game.</p>
+                            <p>SUP / outrigger relay in the bay. Tide-pool treasure — look, don't take. Sand mini golf + coconut bocce.</p>
                         </div>
                     </div>
                 </div>
@@ -554,11 +534,11 @@
             <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Sound at Sea Level</h2>
-                <p class="section-subtitle fade-in">Don't fly the California PA. Salt air will eat it. Three tiers:</p>
+                <p class="section-subtitle fade-in">Don't fly the California PA. Salt air will eat it.</p>
                 <div class="card-grid fade-in">
-                    <div class="plain-card"><h3>Rent the backbone</h3><p>PA, mixer, kit, amps from an on-island house. Biggest line item. Cost it early.</p></div>
+                    <div class="plain-card"><h3>Rent the backbone</h3><p>PA, mixer, kit, amps from an on-island house. Biggest line item — start there.</p></div>
                     <div class="plain-card"><h3>Fly one instrument</h3><p>Everyone brings one as checked bag. The can't-hit-a-wrong-note kit is luggage-portable.</p></div>
-                    <div class="plain-card"><h3>Projector, not lasers</h3><p>Laptop, visuals, a bright projector. Keep the light show simple on year one.</p></div>
+                    <div class="plain-card"><h3>Projector, not lasers</h3><p>Laptop, a bright projector. Year one is not a laser tour.</p></div>
                     <div class="plain-card"><h3>Salt-air care</h3><p>Rinse, dry, cover at night. Nothing you love sits in the trade wind uncovered.</p></div>
                 </div>
             </div>
@@ -568,7 +548,7 @@
             <div class="section-bg" style="background-image:url('assets/dash_beach_openmic.jpg'); --pos:50% 32%;"></div>
             <div class="container">
                 <h2 class="fade-in">Food × Music</h2>
-                <p class="section-subtitle fade-in">Community-cooked. Chip in on ingredients. Pairings write themselves at sea level.</p>
+                <p class="section-subtitle fade-in">Community-cooked. Chip in on ingredients.</p>
                 <div class="site-grid fade-in">
                     <div class="site-card">
                         <div class="site-card-bg" style="background-image:url('assets/john_imu_night.jpg'); --pos:50% 10%;"></div>
@@ -605,7 +585,7 @@
                         </ul>
                     </div>
                     <div class="plain-card">
-                        <h3>Keep it boring</h3>
+                        <h3>Don't get us uninvited</h3>
                         <ul>
                             <li>No ticket sales, no public ads</li>
                             <li>BYO / share — no alcohol sales</li>
@@ -624,7 +604,7 @@
                 <div class="location-content fade-in">
                     <div class="location-info panel">
                         <h3>Hanalei, Kauaʻi</h3>
-                        <p>Fly into Līhuʻe (LIH). About an hour to Hanalei — one-lane bridges, no rushing. June is shoulder-to-dry on the North Shore; still bring a rain layer.</p>
+                        <p>Fly into Līhuʻe (LIH). About an hour to Hanalei — one-lane bridges, no rushing. June is kinder than winter on the North Shore; still bring a rain layer.</p>
                         <p>Hāʻena State Park needs a reservation if you're going past the end of the road (Tunnels). Exact base camp goes to confirmed attendees only.</p>
                         <p style="font-size:0.85rem;opacity:0.7;margin:0;"><em>Map is the bay, not the address.</em></p>
                     </div>
@@ -641,8 +621,8 @@
                 <h2 class="fade-in">Stay</h2>
                 <p class="section-subtitle fade-in">Primary plan is the base-camp buyout. Rentals are for sleeping — not for the party.</p>
                 <div class="card-grid fade-in">
-                    <div class="plain-card"><h3>Base camp</h3><p>Bunks and tents on the site we book. This is the move. TBA until the venue letter lands.</p></div>
-                    <div class="plain-card"><h3>Hanalei / Princeville</h3><p>If you want your own bed: <a href="https://www.airbnb.com/s/Hanalei--Hawaii--United-States/homes?checkin=2027-06-09&amp;checkout=2027-06-14&amp;adults=2" target="_blank" rel="noopener">browse rentals</a>. No events at rentals. That's how you get shut down.</p></div>
+                    <div class="plain-card"><h3>Base camp</h3><p>Bunks and tents on the site we book. This is the move. TBA until we have a site.</p></div>
+                    <div class="plain-card"><h3>Hanalei / Princeville</h3><p>If you want your own bed: <a href="https://www.airbnb.com/s/Hanalei--Hawaii--United-States/homes" target="_blank" rel="noopener">browse rentals</a>. Rentals are for sleeping. No events there.</p></div>
                 </div>
             </div>
         </section>
@@ -651,7 +631,7 @@
             <div class="section-bg" id="photos-section-bg" style="background-image:url('assets/sea_level_line.jpg'); --pos:50% 50%;"></div>
             <div class="container">
                 <h2 class="fade-in">Concept Gallery</h2>
-                <p class="section-subtitle fade-in">Concept renders — likenesses of real friends, transported. Not a documentary, and not real (yet). Any one image can come down.</p>
+                <p class="section-subtitle fade-in">Concept renders of real friends. Not a documentary. Not real yet.</p>
                 <div class="event-toggle fade-in">
                     <button class="event-tab active" type="button" data-event="concept">Concept</button>
                     <button class="event-tab" type="button" data-event="spring">2k crew · real</button>
@@ -675,9 +655,9 @@
             <div class="section-bg" style="background-image:url('assets/zerok_poster.jpg'); --pos:50% 18%;"></div>
             <div class="container">
                 <h2 class="fade-in">Raise Your Hand</h2>
-                <p class="section-subtitle fade-in">Not an RSVP. An interest list. Especially if you have Kauaʻi connections.</p>
+                <p class="section-subtitle fade-in">Not an RSVP. An interest list — especially if you have Kauaʻi connections. Bryan writes back when there is a site and a window.</p>
                 <div class="form-card panel fade-in" id="interest-lock">
-                    <p style="margin-bottom:12px;">Attendee password opens the list. Same friendly latch as 2k — not a secret, just a door.</p>
+                    <p style="margin-bottom:12px;">Same password idea as 2k. Not a secret — just a door.</p>
                     <label for="gate-pass">Password</label>
                     <input id="gate-pass" type="password" autocomplete="current-password">
                     <p style="margin-top:20px;text-align:center;"><button type="button" class="btn" id="gate-open">Open the list</button></p>
@@ -730,7 +710,7 @@
                     <div class="plain-card"><h3>Not a musician?</h3><p>Even better. Can't-hit-a-wrong-note kit, ocean events, kitchen, glow swim.</p></div>
                     <div class="plain-card"><h3>Bring</h3><p>Reef-safe sunscreen, rash guard, headlamp, one instrument, reusable cup, a rain layer for night trades.</p></div>
                     <div class="plain-card"><h3>Weather</h3><p>June is better than winter on the North Shore, not a drought. Pack for sun and a squall.</p></div>
-                    <div class="plain-card"><h3>Noise &amp; drinks</h3><p>One loud night, published end time. BYO / share — nobody's selling alcohol. Don't be the reason the neighbors call.</p></div>
+                    <div class="plain-card"><h3>Who is this for?</h3><p>If you already know 2k or 9k, you know. If you don't: invite-only, limited, raise a hand and we will see.</p></div>
                 </div>
             </div>
         </section>
@@ -751,7 +731,7 @@
                     </a>
                     <div class="site-card sister-card">
                         <div class="site-card-bg" style="background-image:url('assets/ninek_shaka_bay.jpg'); --pos:50% 20%;"></div>
-                        <div class="site-card-content"><p class="tba">0 ft</p><div class="num">0k</div><p>You are here · June · Kauaʻi. Sea-level chapter, venue and dates in progress.</p></div>
+                        <div class="site-card-content"><p class="tba">0 ft</p><div class="num">zer<span class="z0">0</span>K</div><p>You are here. Concept.</p></div>
                     </div>
                 </div>
                 <p class="fade-in" style="text-align:center;"><a href="https://2kfest.com/ijhf/">International Jam House Federation</a></p>
@@ -817,37 +797,6 @@
                 document.getElementById('flow-' + tab.dataset.day).classList.add('active');
             });
         });
-
-        (function () {
-            const cd = document.getElementById('countdown');
-            if (!cd) return;
-            const startMs = Date.parse('2027-06-09T12:00:00-10:00');
-            const endMs = Date.parse('2027-06-14T23:59:59-10:00');
-            const pad = n => String(n).padStart(2, '0');
-            function showMessage(text) {
-                const msg = document.createElement('p');
-                msg.className = 'cd-message';
-                msg.textContent = text;
-                cd.replaceWith(msg);
-            }
-            function tick() {
-                const now = Date.now();
-                if (now >= startMs && now <= endMs) { showMessage('Happening now'); return false; }
-                if (now > endMs) { showMessage('Pau — see you at the next elevation'); return false; }
-                let diff = Math.floor((startMs - now) / 1000);
-                const d = Math.floor(diff / 86400); diff -= d * 86400;
-                const h = Math.floor(diff / 3600); diff -= h * 3600;
-                const m = Math.floor(diff / 60); const s = diff - m * 60;
-                document.getElementById('cd-days').textContent = d;
-                document.getElementById('cd-hours').textContent = pad(h);
-                document.getElementById('cd-mins').textContent = pad(m);
-                document.getElementById('cd-secs').textContent = pad(s);
-                return true;
-            }
-            if (tick() && !reduceMotion) {
-                const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000);
-            }
-        })();
 
         const PHOTO_POS = {
             'crew_pier_walk.jpg': '50% 28%',
