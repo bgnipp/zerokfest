@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#06111f">
+    <title>zer0K '27 · Hanalei, Kauaʻi · June 9–14</title>
+    <meta name="description" content="zer0K: an invite-only interactive music retreat at sea level. Hanalei, Kauaʻi. June 9–14, 2027. Everyone jams, everyone swims, everyone cooks.">
+    <meta name="robots" content="noindex">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="zer0K '27 · Hanalei, Kauaʻi · June 9–14">
+    <meta property="og:description" content="Nine thousand feet. Two thousand feet. Zero. The Federation touches down. June 9–14, 2027.">
+    <meta property="og:image" content="https://zerokfest.com/assets/zerok_poster.jpg">
+    <meta property="og:url" content="https://zerokfest.com/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="zer0K '27 · Hanalei, Kauaʻi">
+    <meta property="twitter:description" content="An interactive music retreat at sea level. June 9–14, 2027.">
+    <meta property="twitter:image" content="https://zerokfest.com/assets/zerok_poster.jpg">
+
+    <link rel="icon" type="image/png" href="assets/hattransp.png">
+    <link rel="preload" href="assets/zerok_poster.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Rye&display=fallback" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #e8c94a;
+            --sunset: #ff7a59;
+            --teal: #2ec4b6;
+            --dark: #06111f;
+            --dark-card: rgba(8, 18, 32, 0.88);
+            --text: #ede8e0;
+            --text-dim: #a09888;
+            --sand: #e8d9b5;
+            --border: rgba(212, 175, 55, 0.22);
+            --font-brand: 'Rye', Georgia, serif;
+            --font-heading: 'Bebas Neue', 'Arial Narrow', sans-serif;
+            --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+            --nav-height: 64px;
+            --section-pad: 80px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
+        body {
+            font-family: var(--font-body);
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 40%, #fff 50%, var(--gold-light) 60%, var(--gold) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h3 { font-family: var(--font-heading); font-size: 1.8rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--gold); text-decoration: none; }
+        a:hover { color: var(--gold-light); text-decoration: underline; }
+        .section-subtitle { text-align: center; color: rgba(255,255,255,0.78); font-size: 1.05rem; max-width: 720px; margin: 0 auto 40px; }
+        .content-section { padding: var(--section-pad) 0; position: relative; overflow: hidden; }
+        .content-section > .section-bg {
+            position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0;
+        }
+        #photos > .section-bg { opacity: 0.5; filter: saturate(0.9); }
+        .content-section::before {
+            content: '';
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to bottom, rgba(6,17,31,0.72) 0%, rgba(6,17,31,0.42) 40%, rgba(6,17,31,0.72) 100%);
+        }
+        .content-section > .container { position: relative; z-index: 2; }
+        .content-section + .content-section::after {
+            content: '';
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: min(60%, 400px); height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--teal), var(--gold), transparent);
+            z-index: 3; opacity: 0.45;
+        }
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .fade-in.visible { opacity: 1; transform: none; }
+
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(6, 17, 31, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000; height: var(--nav-height);
+            border-bottom: 1px solid var(--border);
+        }
+        #navbar .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        #navbar .logo { font-family: var(--font-brand); font-size: 1.4rem; color: var(--gold); }
+        .logo .nav-date { font-family: var(--font-heading); color: var(--text-dim); font-size: 0.85em; letter-spacing: 2px; margin-left: 8px; }
+        #navbar .nav-links { display: flex; list-style: none; gap: 2px; }
+        #navbar .nav-links li a {
+            color: var(--text-dim); padding: 8px 9px; font-weight: 500;
+            text-transform: uppercase; font-size: 0.74rem; letter-spacing: 0.4px;
+        }
+        #navbar .nav-links li a:hover, #navbar .nav-links li a.active { color: var(--gold); text-decoration: none; }
+        .hamburger { display: none; cursor: pointer; background: none; border: none; }
+        .hamburger .bar { display: block; width: 24px; height: 2px; margin: 5px auto; background: var(--text); }
+
+        #home {
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            position: relative; overflow: hidden; text-align: center;
+            padding: calc(var(--nav-height) + 40px) 24px 60px;
+            background: var(--dark) url('assets/zerok_poster.jpg') center / cover no-repeat;
+        }
+        .header-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: radial-gradient(115% 80% at 50% 48%, rgba(6,17,31,0.55) 0%, rgba(6,17,31,0.35) 55%, rgba(6,17,31,0.62) 100%);
+        }
+        .header-content { position: relative; z-index: 2; max-width: 860px; }
+        .header-content h1 {
+            font-family: var(--font-brand);
+            font-size: clamp(3.2rem, 9vw, 6rem);
+            color: var(--gold);
+            text-shadow: 2px 3px 16px rgba(0,0,0,0.7);
+            line-height: 1.05;
+        }
+        .header-content .date-span {
+            display: block; font-family: var(--font-heading);
+            font-size: clamp(1.2rem, 3.2vw, 1.85rem);
+            letter-spacing: 3px; margin-top: 12px; color: var(--text); text-transform: uppercase;
+        }
+        .header-about-text { max-width: 640px; margin: 0 auto 1.6rem; font-size: 1.08rem; color: rgba(255,255,255,0.9); }
+        .concept-chip {
+            display: inline-block; margin-bottom: 16px; padding: 6px 14px;
+            border: 1px solid var(--border); border-radius: 999px;
+            font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
+        }
+        .countdown { display: flex; justify-content: center; gap: 12px; margin: 0 auto 1.5rem; flex-wrap: wrap; }
+        .cd-unit {
+            min-width: 64px; padding: 10px 6px; text-align: center;
+            background: rgba(6,17,31,0.5); border: 1px solid var(--border); border-radius: 10px;
+        }
+        .cd-num { font-family: var(--font-heading); font-size: 2.3rem; color: var(--gold); line-height: 1; }
+        .cd-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+        .cd-message { margin: 0 auto 1.5rem; font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
+        .header-buttons { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .btn {
+            display: inline-block; background: var(--gold); color: var(--dark);
+            padding: 12px 28px; border-radius: 6px; font-weight: 700;
+            font-family: var(--font-heading); font-size: 1.1rem; letter-spacing: 1.5px; text-transform: uppercase;
+        }
+        .btn:hover { background: var(--gold-light); text-decoration: none; color: var(--dark); }
+        .btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+        .btn-outline:hover { background: var(--gold); color: var(--dark); }
+        .scroll-hint {
+            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2;
+            width: 20px; height: 20px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+            transform: translateX(-50%) rotate(45deg); opacity: 0.55;
+        }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+        .stat {
+            text-align: center; padding: 22px 12px;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px;
+        }
+        .stat .num { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--gold); line-height: 1; }
+        .stat .lbl { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
+
+        .flow-tabs, .event-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+        .flow-tab, .event-tab {
+            background: var(--dark-card); border: 2px solid var(--border); color: var(--text-dim);
+            font-family: var(--font-heading); font-size: 1.05rem; letter-spacing: 1.5px;
+            padding: 8px 18px; border-radius: 8px; cursor: pointer; text-transform: uppercase;
+        }
+        .flow-tab.active, .event-tab.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+        .flow-day { display: none; max-width: 680px; margin: 0 auto; background: var(--dark-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+        .flow-day.active { display: block; }
+        .flow-day h3 { color: var(--teal); }
+        .flow-day p { color: rgba(255,255,255,0.82); margin: 0; }
+
+        .site-grid, .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .site-card, .plain-card {
+            border-radius: 14px; overflow: hidden; position: relative;
+            background: var(--dark-card); border: 1px solid var(--border);
+        }
+        .site-card { min-height: 260px; }
+        .site-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+        .site-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.15)); }
+        .site-card-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 22px; }
+        .site-card-content h3 { color: var(--gold); font-size: 1.4rem; margin-bottom: 6px; }
+        .site-card-content p { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
+        .tba { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
+        .plain-card { padding: 24px; }
+        .plain-card h3 { color: var(--gold); font-size: 1.35rem; }
+        .plain-card p, .plain-card li { color: rgba(255,255,255,0.78); font-size: 0.92rem; }
+        .plain-card ul { padding-left: 18px; }
+
+        .location-content { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+        .location-info { background: var(--dark-card); padding: 28px; border-radius: 14px; border: 1px solid var(--border); }
+        .map-container { border-radius: 14px; overflow: hidden; height: 380px; border: 2px solid var(--border); }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+        .form-card { max-width: 640px; margin: 0 auto; background: var(--dark-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+        label { display: block; font-size: 0.82rem; letter-spacing: 0.6px; color: var(--text-dim); margin: 14px 0 6px; }
+        input, select, textarea {
+            width: 100%; padding: 10px 12px; border-radius: 8px;
+            border: 1px solid var(--border); background: rgba(0,0,0,0.35); color: var(--text); font-family: inherit;
+        }
+        textarea { min-height: 90px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .check-grid { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 6px; }
+        .check-grid label { margin: 0; color: var(--text); font-size: 0.88rem; display: flex; align-items: center; gap: 6px; }
+        .check-grid input { width: auto; }
+
+        .main-photo-container {
+            margin-bottom: 16px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            height: min(70vh, 560px); min-height: 220px;
+        }
+        .main-photo-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; border: 2px solid var(--border); }
+        .thumbnail-wrapper { position: relative; }
+        .carousel-thumbnails {
+            display: flex; overflow-x: auto; gap: 8px; padding: 8px 0; scrollbar-width: none;
+        }
+        .carousel-thumbnails::-webkit-scrollbar { display: none; }
+        .carousel-thumbnails img {
+            width: 110px; height: 72px; object-fit: cover; cursor: pointer;
+            border-radius: 6px; border: 2px solid transparent; flex-shrink: 0;
+        }
+        .carousel-thumbnails img.active-thumb { border-color: var(--gold); }
+        .scroll-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+            background: rgba(0,0,0,0.5); border: none; color: white; font-size: 1.3rem;
+            cursor: pointer; padding: 0 8px; height: 56%;
+        }
+        .left-arrow { left: 0; } .right-arrow { right: 0; }
+        .modal {
+            display: none; position: fixed; z-index: 2000; inset: 0;
+            background: rgba(0,0,0,0.95); justify-content: center; align-items: center;
+        }
+        .modal img { max-width: 90vw; max-height: 85vh; border-radius: 8px; }
+        .modal-close, .modal-prev, .modal-next {
+            position: absolute; color: white; cursor: pointer; font-size: 2rem; opacity: 0.75;
+        }
+        .modal-close { top: 12px; right: 18px; }
+        .modal-prev { left: 10px; top: 50%; } .modal-next { right: 10px; top: 50%; }
+
+        footer { text-align: center; padding: 24px 20px; background: #040910; color: var(--text-dim); font-size: 0.85rem; border-top: 1px solid var(--border); }
+        .sister-stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+        .sister-stat { text-align: center; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 10px; }
+        .sister-stat .num { font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold); line-height: 1; }
+        .sister-stat .lbl { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
+
+        @media (max-width: 900px) {
+            #navbar .nav-links {
+                position: fixed; left: -100%; top: var(--nav-height); flex-direction: column;
+                width: 100%; background: rgba(6,17,31,0.97); padding: 12px 0; transition: left 0.3s;
+            }
+            #navbar .nav-links.active { left: 0; }
+            #navbar .nav-links li a { display: block; padding: 1rem 1.4rem; font-size: 1.05rem; }
+            .hamburger { display: block; }
+            .stat-grid, .site-grid, .card-grid, .location-content, .form-row, .sister-stat-grid { grid-template-columns: 1fr; }
+            :root { --section-pad: 56px; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Festival",
+        "name": "zer0K",
+        "startDate": "2027-06-09",
+        "endDate": "2027-06-14",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "description": "An invite-only interactive music retreat at sea level in Hanalei, Kauaʻi.",
+        "image": "https://zerokfest.com/assets/zerok_poster.jpg",
+        "url": "https://zerokfest.com/",
+        "isAccessibleForFree": true,
+        "location": {
+            "@type": "Place",
+            "name": "Hanalei Bay",
+            "address": { "@type": "PostalAddress", "addressLocality": "Hanalei", "addressRegion": "HI", "addressCountry": "US" }
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">zer0K <span class="nav-date">June '27</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">Sea Level</a></li>
+                <li><a href="#schedule">Flow</a></li>
+                <li><a href="#the-site">Base Camp</a></li>
+                <li><a href="#oceanlympics">Ocean-lympics</a></li>
+                <li><a href="#music">Sound</a></li>
+                <li><a href="#kuleana">Kuleana</a></li>
+                <li><a href="#photos">Gallery</a></li>
+                <li><a href="#interest">Hand Up</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Toggle menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <p class="concept-chip">Concept · venue in progress · dates locked</p>
+            <h1>zer0K<span class="date-span">June 9 &ndash; 14, 2027 · Hanalei, Kauaʻi</span></h1>
+            <p class="header-about-text">Nine thousand feet. Two thousand feet. Zero. The Federation touches down. An invite-only music retreat at sea level — everyone jams, everyone swims, everyone cooks.</p>
+            <div class="countdown" id="countdown" role="timer" aria-label="Countdown to zer0K">
+                <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">days</span></div>
+                <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">hrs</span></div>
+                <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">min</span></div>
+                <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">sec</span></div>
+            </div>
+            <div class="header-buttons">
+                <a href="#interest" class="btn rsvp-gate-link">Raise Your Hand</a>
+                <a href="#about" class="btn btn-outline">What is zer0K</a>
+            </div>
+        </div>
+        <div class="scroll-hint" aria-hidden="true"></div>
+    </header>
+
+    <main>
+        <section id="about" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/ninek_pier_crew.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Sea Level</h2>
+                <p class="section-subtitle fade-in">The International Jam House Federation already has a mountain and a foothill. zer0K is the base camp — five nights on Kauaʻi's North Shore.</p>
+                <div class="stat-grid fade-in">
+                    <div class="stat"><div class="num">9,000 ft</div><div class="lbl">9k Fest · Cuchara, CO · August</div></div>
+                    <div class="stat"><div class="num">2,000 ft</div><div class="lbl">2k Fest · Murphys, CA · Fall</div></div>
+                    <div class="stat"><div class="num">0 ft</div><div class="lbl">zer0K · Hanalei, HI · June</div></div>
+                </div>
+                <p class="fade-in" style="max-width:680px;margin:0 auto;text-align:center;color:var(--text-dim);">No tickets. No public ads. Same format as the other houses: community-cooked meals, open jams, a competitive track, and a hard rule — <em>no spectators, only participants.</em> Exact base camp is still being found. Dates are not.</p>
+            </div>
+        </section>
+
+        <section id="schedule" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/ninek_guitar_duo_sand.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">The Flow</h2>
+                <p class="section-subtitle fade-in">A shape, not a lineup. Subject to tides. Should not be trusted or believed.</p>
+                <div class="flow-tabs fade-in">
+                    <button class="flow-tab active" data-day="wed">Wed 9</button>
+                    <button class="flow-tab" data-day="thu">Thu 10</button>
+                    <button class="flow-tab" data-day="fri">Fri 11</button>
+                    <button class="flow-tab" data-day="sat">Sat 12</button>
+                    <button class="flow-tab" data-day="sun">Sun 13</button>
+                    <button class="flow-tab" data-day="mon">Mon 14</button>
+                </div>
+                <div class="flow-day active fade-in" id="flow-wed"><h3>Arrive · Sunset jam</h3><p>Land at LIH, crawl the one-lane bridges, drop bags. Unplugged sunset jam on the sand. First meal is whoever got there first.</p></div>
+                <div class="flow-day" id="flow-thu"><h3>Ocean-lympics I · Poke &amp; Post-Rock</h3><p>Snorkel scavenger + tide-pool hunt. Dinner pairing: poke and post-rock. Acoustic after dark if the neighbors are in the tent.</p></div>
+                <div class="flow-day" id="flow-fri"><h3>Sunrise summit · Night stage</h3><p>Okolehao at dawn with whoever's awake. One amplified night — hard end time. This is the loud one.</p></div>
+                <div class="flow-day" id="flow-sat"><h3>Ocean-lympics II · Loco Moco &amp; Lo-Fi</h3><p>SUP / outrigger relay, sand mini golf, coconut bocce. Loco moco + lo-fi. Late night if the site allows.</p></div>
+                <div class="flow-day" id="flow-sun"><h3>Musubi &amp; Math Rock · Pau hana</h3><p>Championship playoff. Talent show. Imu night if we earn it. Then pau — we're done being loud.</p></div>
+                <div class="flow-day" id="flow-mon"><h3>Breakdown · Beach open mic</h3><p>Leave it better. Unplugged open mic, swim, fly. No scheduled anything after checkout.</p></div>
+            </div>
+        </section>
+
+        <section id="the-site" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/nathan_taro_stage.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Base Camp</h2>
+                <p class="section-subtitle fade-in">We don't own land here. We're buying buffer distance and neighbor trust — not a vacation-rental party.</p>
+                <div class="site-grid fade-in">
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/lanai_jam_dog.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where we sleep</h3><p>Full-site camp buyout or partner retreat. Bunks + tents. Not an STR.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/saxes_on_sand.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where it gets loud</h3><p>One night stage with a published end time. Everything else stays unplugged or ocean-based.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/john_imu_night.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">TBA</p><h3>Where we eat</h3><p>Field kitchen, chip-in ingredients, one imu night if the host is in.</p></div>
+                    </div>
+                    <div class="site-card">
+                        <div class="site-card-bg" style="background-image:url('assets/oceanlympics_snorkel.jpg');"></div>
+                        <div class="site-card-content"><p class="tba">Hanalei / Tunnels</p><h3>Where we swim</h3><p>Hanalei Bay for relays. Tunnels reef for the scavenger hunt. Reef-safe only.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="oceanlympics" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/ninek_glow_beach.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Ocean-lympics</h2>
+                <p class="section-subtitle fade-in">Glowlympics goes saltwater. Teams of 3. Friday + Saturday heats. Sunday playoff.</p>
+                <div class="card-grid fade-in">
+                    <div class="plain-card"><h3>Snorkel scavenger</h3><p>Tunnels reef. Find the flags, don't kick coral, first team back on the sand.</p></div>
+                    <div class="plain-card"><h3>SUP / outrigger relay</h3><p>Hanalei Bay. Three legs, one board or canoe, no excuses about the current.</p></div>
+                    <div class="plain-card"><h3>Tide-pool treasure</h3><p>Low-tide hunt. Look, don't take. Photos count as finds.</p></div>
+                    <div class="plain-card"><h3>Night glow swim</h3><p>LED bracelets, calm water, no lasers. Last team still glowing wins the vibe.</p></div>
+                    <div class="plain-card"><h3>Sunrise summit</h3><p>Okolehao Trail. First three at the overlook get the seed pick.</p></div>
+                    <div class="plain-card"><h3>Sand mini golf + coconut bocce</h3><p>Because we still need a putting game and something you can lose a coconut to.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="music" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/ninek_shaka_bay.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Sound at Sea Level</h2>
+                <p class="section-subtitle fade-in">Don't ship the Murphys rig. Salt air will eat it. Three tiers:</p>
+                <div class="card-grid fade-in">
+                    <div class="plain-card"><h3>Rent the backbone</h3><p>PA, mixer, kit, amps from an on-island house. Biggest line item. Cost it early.</p></div>
+                    <div class="plain-card"><h3>Fly one instrument</h3><p>Everyone brings one as checked bag. Diatonic workshop kit is luggage-portable.</p></div>
+                    <div class="plain-card"><h3>Projector, not lasers</h3><p>Laptop + Resolume + a bright projector. No Class 4 outdoors on year one.</p></div>
+                    <div class="plain-card"><h3>Salt-air care</h3><p>Rinse, dry, cover at night. Nothing you love sits in the trade wind uncovered.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="food" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/john_imu_night.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Food × Music</h2>
+                <p class="section-subtitle fade-in">Community-cooked. Chip in on ingredients. Pairings write themselves at sea level.</p>
+                <div class="card-grid fade-in">
+                    <div class="plain-card"><h3>Poke &amp; Post-Rock</h3><p>Thursday. Fresh, quiet, long notes.</p></div>
+                    <div class="plain-card"><h3>Loco Moco &amp; Lo-Fi</h3><p>Saturday. Comfort food, low end.</p></div>
+                    <div class="plain-card"><h3>Musubi &amp; Math Rock</h3><p>Sunday. Tight, weird, portable.</p></div>
+                    <div class="plain-card"><h3>Imu &amp; Ambient · Shave Ice &amp; Shoegaze</h3><p>If we earn the pit. Melted everything.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kuleana" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/lanai_jam_dog.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Kuleana</h2>
+                <p class="section-subtitle fade-in">We're guests. Hanalei is a small town on one road. Buffer distance and neighbor relations are the whole game.</p>
+                <div class="card-grid fade-in">
+                    <div class="plain-card">
+                        <h3>Mālama ʻāina</h3>
+                        <ul>
+                            <li>Volunteer workday with the host org</li>
+                            <li>Reef-safe sunscreen only</li>
+                            <li>No single-use plastics</li>
+                            <li>Leave it better than we found it</li>
+                        </ul>
+                    </div>
+                    <div class="plain-card">
+                        <h3>Be boring, legally</h3>
+                        <ul>
+                            <li>No ticket sales, no public ads</li>
+                            <li>BYO / share — no alcohol sales</li>
+                            <li>Amplified sound has a hard end time</li>
+                            <li>Talk to neighbors first; invite them</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/sunrise_summit.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Getting There</h2>
+                <div class="location-content fade-in">
+                    <div class="location-info">
+                        <h3>Hanalei, Kauaʻi</h3>
+                        <p>Fly into Līhuʻe (LIH). About an hour to Hanalei — one-lane bridges, no rushing. June is dry-season trades.</p>
+                        <p>Hāʻena State Park needs a reservation if you're going past the end of the road. Exact base camp goes to confirmed attendees only.</p>
+                        <p style="font-size:0.85rem;opacity:0.7;"><em>Map is the bay, not the address.</em></p>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14800!2d-159.50!3d22.21!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c06f0c0c0c0c0c1%3A0x0!2sHanalei%20Bay!5e0!3m2!1sen!2sus!4v1736441800000" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="accommodations" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Stay</h2>
+                <p class="section-subtitle fade-in">Primary plan is the base-camp buyout. Rentals are for sleeping — not for the party.</p>
+                <div class="card-grid fade-in">
+                    <div class="plain-card"><h3>Base camp</h3><p>Bunks and tents on the site we book. This is the move. TBA until the venue letter lands.</p></div>
+                    <div class="plain-card"><h3>Hanalei / Princeville</h3><p>If you want your own bed: <a href="https://www.airbnb.com/s/Hanalei--Hawaii--United-States/homes?checkin=2027-06-09&amp;checkout=2027-06-14&amp;adults=2" target="_blank">browse rentals</a>. No events at rentals. That's how you get shut down.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="photos" class="content-section">
+            <div class="section-bg" id="photos-section-bg"></div>
+            <div class="container">
+                <h2 class="fade-in">Concept Gallery</h2>
+                <p class="section-subtitle fade-in">Concept renders — the crew, transported. Not real (yet).</p>
+                <div class="event-toggle fade-in">
+                    <button class="event-tab active" data-event="concept">Concept</button>
+                    <button class="event-tab" data-event="spring">2k crew</button>
+                    <button class="event-tab" data-event="nine">9k crew</button>
+                </div>
+                <div class="carousel-container fade-in">
+                    <div class="main-photo-container"><img id="main-photo" src="" alt="zer0K concept photo"></div>
+                    <div class="thumbnail-wrapper">
+                        <button class="scroll-arrow left-arrow" id="scroll-photo-left" aria-label="Scroll left">&lt;</button>
+                        <div class="carousel-thumbnails" id="photo-thumbnails"></div>
+                        <button class="scroll-arrow right-arrow" id="scroll-photo-right" aria-label="Scroll right">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interest" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/zerok_poster.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Raise Your Hand</h2>
+                <p class="section-subtitle fade-in">Not an RSVP. An interest list. Especially if you have Kauaʻi connections.</p>
+                <form class="form-card fade-in" id="interest-form">
+                    <div class="form-row">
+                        <div><label for="iname">Name *</label><input id="iname" name="name" required></div>
+                        <div><label for="iemail">Email *</label><input id="iemail" name="email" type="email" required></div>
+                    </div>
+                    <label for="ilikely">Likelihood *</label>
+                    <select id="ilikely" name="likely" required>
+                        <option value="in">I'm in</option>
+                        <option value="probably">Probably</option>
+                        <option value="curious">Curious</option>
+                    </select>
+                    <label for="idays">Days you could make</label>
+                    <input id="idays" name="days" placeholder="e.g. Wed–Mon / weekend only">
+                    <label for="ikauai">Kauaʻi connections</label>
+                    <textarea id="ikauai" name="kauai" placeholder="Host, land, gear, locals, production house, anything…"></textarea>
+                    <label for="iinst">Instruments you'd fly with</label>
+                    <input id="iinst" name="instruments">
+                    <p style="margin:14px 0 4px;font-size:0.82rem;color:var(--text-dim);">Roles you'd take</p>
+                    <div class="check-grid">
+                        <label><input type="checkbox" name="role" value="sound"> Sound</label>
+                        <label><input type="checkbox" name="role" value="kitchen"> Kitchen</label>
+                        <label><input type="checkbox" name="role" value="ocean"> Ocean safety</label>
+                        <label><input type="checkbox" name="role" value="oly"> Ocean-lympics</label>
+                    </div>
+                    <label for="inotes">Anything else</label>
+                    <textarea id="inotes" name="notes"></textarea>
+                    <p style="margin-top:20px;text-align:center;"><button type="submit" class="btn">Send to Bryan</button></p>
+                    <p style="font-size:0.78rem;color:var(--text-dim);text-align:center;margin-top:10px;">Opens a mailto. Password-gated like 2k RSVP.</p>
+                </form>
+            </div>
+        </section>
+
+        <section id="logistics" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/sea_level_line.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">FAQ</h2>
+                <div class="card-grid fade-in">
+                    <div class="plain-card"><h3>Cost</h3><p>Free, but you contribute — a set, a meal, a role, ingredients. Same as 2k.</p></div>
+                    <div class="plain-card"><h3>Not a musician?</h3><p>Even better. Diatonic kit, ocean events, kitchen, glow swim.</p></div>
+                    <div class="plain-card"><h3>Bring</h3><p>Reef-safe sunscreen, rash guard, headlamp, one instrument, reusable cup, layers for night trades.</p></div>
+                    <div class="plain-card"><h3>Noise</h3><p>One loud night, published end time. Complaint-driven island. Don't be the reason.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sister-fests" class="content-section">
+            <div class="section-bg" style="background-image:url('assets/ninek_beach_family.jpg');"></div>
+            <div class="container">
+                <h2 class="fade-in">Three Houses. Three Elevations.</h2>
+                <div class="sister-stat-grid fade-in">
+                    <div class="sister-stat"><div class="num">9k</div><div class="lbl"><a href="https://9kfest.com" target="_blank">9kfest.com</a> · August · Colorado</div></div>
+                    <div class="sister-stat"><div class="num">2k</div><div class="lbl"><a href="https://2kfest.com">2kfest.com</a> · Fall · California</div></div>
+                    <div class="sister-stat"><div class="num">0k</div><div class="lbl">You are here · June · Kauaʻi</div></div>
+                </div>
+                <p class="fade-in" style="text-align:center;"><a href="https://2kfest.com/ijhf/">International Jam House Federation</a> — no spectators. Only participants.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="photo-modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <a class="modal-prev">&#10094;</a>
+        <img id="modal-img" alt="">
+        <a class="modal-next">&#10095;</a>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="current-year">2026</span> zer0K · <a href="https://2kfest.com/ijhf/">IJHF</a> · <a href="https://www.instagram.com/twokfest/" target="_blank">@twokfest</a></p>
+        <p style="margin-top:10px;"><a href="#interest" class="rsvp-gate-link" style="color:var(--text-dim);font-size:0.78rem;">Raise your hand →</a></p>
+    </footer>
+
+    <script>
+    (function () {
+        var links = document.querySelectorAll('.rsvp-gate-link');
+        var expected = atob('bm9kcm9wZA==');
+        links.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                if (link.getAttribute('href') === '#interest' && document.getElementById('interest-form')) {
+                    /* still gate first visit */
+                }
+                e.preventDefault();
+                var entry = window.prompt('Enter the attendee password:');
+                if (entry === null) return;
+                if (entry.trim().toLowerCase() === expected) {
+                    if (link.getAttribute('href').indexOf('#') === 0) {
+                        document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        window.location.href = link.getAttribute('href');
+                    }
+                } else {
+                    window.alert('Sorry, that password is incorrect. Reach out to Bryan if you need it.');
+                }
+            });
+        });
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }));
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            const io = new IntersectionObserver((ents) => {
+                ents.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+            }, { threshold: 0.08 });
+            io.observe(el);
+        });
+
+        document.querySelectorAll('.flow-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.flow-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.flow-day').forEach(d => d.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('flow-' + tab.dataset.day).classList.add('active');
+            });
+        });
+
+        (function () {
+            const cd = document.getElementById('countdown');
+            if (!cd) return;
+            const startMs = Date.parse('2027-06-09T12:00:00-10:00');
+            const endMs = Date.parse('2027-06-14T23:59:59-10:00');
+            const pad = n => String(n).padStart(2, '0');
+            function showMessage(text) {
+                const msg = document.createElement('p');
+                msg.className = 'cd-message';
+                msg.textContent = text;
+                cd.replaceWith(msg);
+            }
+            function tick() {
+                const now = Date.now();
+                if (now >= startMs && now <= endMs) { showMessage('Happening now'); return false; }
+                if (now > endMs) { showMessage('Pau — see you at the next elevation'); return false; }
+                let diff = Math.floor((startMs - now) / 1000);
+                const d = Math.floor(diff / 86400); diff -= d * 86400;
+                const h = Math.floor(diff / 3600); diff -= h * 3600;
+                const m = Math.floor(diff / 60); const s = diff - m * 60;
+                document.getElementById('cd-days').textContent = d;
+                document.getElementById('cd-hours').textContent = pad(h);
+                document.getElementById('cd-mins').textContent = pad(m);
+                document.getElementById('cd-secs').textContent = pad(s);
+                return true;
+            }
+            if (tick()) {
+                const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000);
+            }
+        })();
+
+        const photoSets = {
+            concept: [
+                'assets/ninek_pier_crew.jpg',
+                'assets/ninek_shaka_bay.jpg',
+                'assets/ninek_beach_family.jpg',
+                'assets/ninek_guitar_duo_sand.jpg',
+                'assets/ninek_glow_beach.jpg',
+                'assets/crew_pier_walk.jpg',
+                'assets/saxes_on_sand.jpg',
+                'assets/nathan_taro_stage.jpg',
+                'assets/billroland_lanai.jpg',
+                'assets/dash_beach_openmic.jpg',
+                'assets/john_imu_night.jpg',
+                'assets/oceanlympics_snorkel.jpg',
+                'assets/night_glow_swim.jpg',
+                'assets/sunrise_summit.jpg',
+                'assets/lanai_jam_dog.jpg',
+                'assets/zerok_poster.jpg',
+            ],
+            spring: [
+                'https://2kfest.com/spring26/fullyard.jpg',
+                'https://2kfest.com/spring26/outdoorcircle.jpg',
+                'https://2kfest.com/spring26/saxes.jpg',
+                'https://2kfest.com/spring26/nathan.jpg',
+                'https://2kfest.com/spring26/outdoor_stage_night.jpg',
+                'https://2kfest.com/spring26/billroland.jpg',
+                'https://2kfest.com/spring26/dashponcho.jpg',
+                'https://2kfest.com/spring26/johngab.jpg',
+                'https://2kfest.com/spring26/jamsoutdoors.jpg',
+                'https://2kfest.com/spring26/astro.jpg',
+            ],
+            nine: [
+                'https://9kfest.com/images/feature_photo_1.jpg',
+                'https://9kfest.com/images/feature_photo_2.jpg',
+                'https://9kfest.com/images/feature_photo_3_everybody_is_a_musician.jpg',
+                'https://9kfest.com/images/feature_photo_4.jpg',
+                'https://9kfest.com/images/feature_photo_5.jpg',
+                'https://9kfest.com/images/headline_photo.jpg',
+            ],
+        };
+        let currentPhotos = photoSets.concept;
+        let currentPhotoIdx = 0;
+        const mainPhoto = document.getElementById('main-photo');
+        const photoThumbs = document.getElementById('photo-thumbnails');
+        const photosSectionBg = document.getElementById('photos-section-bg');
+
+        function scrollThumbIntoView(strip, el) {
+            if (!strip || !el) return;
+            const left = el.offsetLeft - (strip.clientWidth - el.clientWidth) / 2;
+            strip.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+        }
+        function setPhoto(idx, scroll = false) {
+            currentPhotoIdx = idx;
+            const src = currentPhotos[idx];
+            mainPhoto.src = src;
+            if (photosSectionBg) photosSectionBg.style.backgroundImage = `url('${src}')`;
+            Array.from(photoThumbs.children).forEach((t, i) => t.classList.toggle('active-thumb', i === idx));
+            if (scroll) scrollThumbIntoView(photoThumbs, photoThumbs.children[idx]);
+        }
+        function buildPhotoThumbs() {
+            photoThumbs.innerHTML = '';
+            currentPhotos.forEach((file, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = file;
+                thumb.alt = 'Photo ' + (idx + 1);
+                thumb.loading = 'lazy';
+                thumb.addEventListener('click', () => setPhoto(idx, true));
+                photoThumbs.appendChild(thumb);
+            });
+        }
+        document.querySelectorAll('#photos .event-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('#photos .event-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentPhotos = photoSets[tab.dataset.event];
+                buildPhotoThumbs();
+                setPhoto(0);
+                photoThumbs.scrollTo({ left: 0 });
+            });
+        });
+        buildPhotoThumbs();
+        setPhoto(0);
+        document.getElementById('scroll-photo-left').addEventListener('click', () => photoThumbs.scrollBy({ left: -200, behavior: 'smooth' }));
+        document.getElementById('scroll-photo-right').addEventListener('click', () => photoThumbs.scrollBy({ left: 200, behavior: 'smooth' }));
+
+        const modal = document.getElementById('photo-modal');
+        const modalImg = document.getElementById('modal-img');
+        let modalIdx = 0;
+        mainPhoto.addEventListener('click', () => {
+            modalIdx = currentPhotoIdx;
+            modalImg.src = currentPhotos[modalIdx];
+            modal.style.display = 'flex';
+        });
+        function closeModal() { modal.style.display = 'none'; }
+        function showModal(dir) {
+            modalIdx = (modalIdx + dir + currentPhotos.length) % currentPhotos.length;
+            modalImg.src = currentPhotos[modalIdx];
+            setPhoto(modalIdx, true);
+        }
+        document.querySelector('.modal-close').addEventListener('click', closeModal);
+        document.querySelector('.modal-prev').addEventListener('click', () => showModal(-1));
+        document.querySelector('.modal-next').addEventListener('click', () => showModal(1));
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+        document.getElementById('interest-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const f = e.target;
+            const roles = [...f.querySelectorAll('input[name=role]:checked')].map(c => c.value).join(', ');
+            const body = [
+                'zer0K interest',
+                'Name: ' + f.name.value,
+                'Email: ' + f.email.value,
+                'Likelihood: ' + f.likely.value,
+                'Days: ' + f.days.value,
+                'Kauai: ' + f.kauai.value,
+                'Instruments: ' + f.instruments.value,
+                'Roles: ' + roles,
+                'Notes: ' + f.notes.value,
+            ].join('\n');
+            window.location.href = 'mailto:bgnipp@gmail.com?subject=' + encodeURIComponent('zer0K interest — ' + f.name.value) + '&body=' + encodeURIComponent(body);
+        });
+    });
+    </script>
+</body>
+</html>
